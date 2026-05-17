@@ -90,17 +90,36 @@
     </div>
 
     <figure class="image has-text-centered">
-      <img src="./static/images/KakaoTalk_Photo_2026-05-17-22-54-28.png" alt="Turns Distribution by Circuit Type" style="display: inline-block; width: 90%; height: auto;">
+      <img src="./static/images/sh2.png" alt="Turns Distribution by Circuit Type" style="display: inline-block; width: 90%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 3.</strong> Statistical distribution and average number of turns across different circuit types. Street circuits exhibit the highest average ($19.2$ turns) and a much wider variation, providing an unpredictable labyrinth for drivers compared to more standardized permanent Race tracks ($15.6$ turns).
+        <strong>Figure 3.</strong> Statistical distribution and average number of turns across different circuit types. Street circuits exhibit the highest average ($19.2$ turns) and a wider variation, providing an unpredictable labyrinth for drivers compared to more standardized permanent Race tracks ($15.6$ turns).
       </figcaption>
     </figure>
+
+    <div class="content has-text-justified mt-5">
+      <p>
+        Does this structural complexity directly change the pacing of a Grand Prix? To answer this, we analyzed the direct correlation between the volume of turns and the resulting <strong>Average Best Lap Times</strong>. The data reveals a clear, progressive penalty on time as the circuit layout becomes more intricate.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="./static/images/sh1.png" alt="More Turns More Time Bar Chart" style="display: inline-block; width: 90%; height: auto;">
+      <figcaption class="is-size-6 has-text-grey mt-2">
+        <strong>Figure 4.</strong> Correlation between the number of turns and average best lap times (seconds). Circuits with fewer corners ($\le13$) clock an agile average of $70.3$ seconds, whereas turn-heavy tracks ($\ge18$) push the limits of endurance up to $90.9$ seconds.
+      </figcaption>
+    </figure>
+
+    <div class="content has-text-justified mt-4">
+      <p>
+        As the visualization demonstrates, tracks with few corners ($\le13$) yield blistering fast laps averaging $70.3$ seconds. However, as the turn count climbs into the "Many" category ($\ge18$), the average lap time stretches significantly to $90.9$ seconds. This physical reality forces teams into a high-stakes compromise: do they setup the car for pure straight-line velocity, or maximize downforce for cornering precision? This architectural tension is exactly why every circuit tells a completely different story.
+      </p>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 " style="text-align: center;">2. Macro Analysis: Racetrack Layout Volatility</h2>
+    <h2 class="title is-3" style="text-align: center;">2. Macro Analysis: Racetrack Layout Volatility</h2>
     <div class="content has-text-justified">
       <p>
         Track safety standards and modern architectural designs often require modifications to existing circuits. To quantify how consistent these venues remain, we conducted a <strong>Circuit Layout Stability Analysis</strong> across the entire calendar from 2018 to 2024 using the Coefficient of Variation ($CV$) of historical fast laps.
@@ -110,7 +129,7 @@
     <figure class="image has-text-centered">
       <img src="./static/images/KakaoTalk_Photo_2026-05-17-21-23-58.png" alt="F1 Circuit Layout Stability Analysis" style="width: 100%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 4.</strong> Stability categorization of F1 Grands Prix based on lap time volatility ($CV$). Tracks are clustered into Very Stable, Stable, and Variable domains.
+        <strong>Figure 5.</strong> Stability categorization of F1 Grands Prix based on lap time volatility ($CV$). Tracks are clustered into Very Stable, Stable, and Variable domains.
       </figcaption>
     </figure>
 
@@ -134,7 +153,7 @@
     <figure class="image has-text-centered">
       <img src="./static/images/yg1.png" alt="Circuits with exactly one layout change" style="display: inline-block; width: 90%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 5.</strong> Historical race count (2003–2024) for circuits that underwent exactly one layout change. Melbourne stands out as the most prominent street circuit in this rare category, hosting 20 historical races under this evolutionary framework.
+        <strong>Figure 6.</strong> Historical race count (2003–2024) for circuits that underwent exactly one layout change. Melbourne stands out as the most prominent street circuit in this rare category, hosting 20 historical races under this evolutionary framework.
       </figcaption>
     </figure>
 
@@ -147,7 +166,7 @@
     <figure class="image has-text-centered">
       <img src="./static/images/yg2.png" alt="Melbourne Lap Time Trend" style="display: inline-block; width: 95%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 6.</strong> Historical lap time trajectory for Albert Park (2018–2024). The red vertical dashed line marks the 2022 layout redesign, which resulted in a massive, instantaneous drop in both the fastest lap and winner's average lap time—proving how spatial design directly fuels the racing drama.
+        <strong>Figure 7.</strong> Historical lap time trajectory for Albert Park (2018–2024). The red vertical dashed line marks the 2022 layout redesign, which resulted in a massive, instantaneous drop in both the fastest lap and winner's average lap time—proving how spatial design directly fuels the racing drama.
       </figcaption>
     </figure>
   </div>
