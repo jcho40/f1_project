@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="An in-depth data visualization analysis of Formula 1 circuits, layout stability, and telemetry trends.">
+        content="An in-depth data visualization analysis of Formula 1 circuits, focusing on why fans are obsessed with racetrack anatomy and speed dynamics.">
   <meta name="keywords" content="Formula 1, F1, Data Visualization, Telemetry, Circuit Stability, FastF1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>F1 Circuit Evolution & Telemetry Analysis</title>
+  <title>Beyond the Asphalt: Why We Are Obsessed with F1 Circuits</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
@@ -21,7 +21,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Speed, Space, and Stability:<br>A Data-Driven Exploration of Formula 1 Circuits</h1>
+          <h1 class="title is-1 publication-title">Beyond the Asphalt:<br>Why Millions are Obsessed with F1—Through the Lens of Circuit Dynamics</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <strong>Jeonghwa Cho</strong>, <strong>Seunghyun Ryu</strong>, <strong>Seohyun Kim</strong>, and <strong>Yonggyun Kim</strong>
@@ -44,7 +44,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Formula 1 represents the pinnacle of motorsport, where performance is determined by the complex interplay between engineering, driver skill, and circuit design. This project investigates the structural and dynamic characteristics of F1 circuits over time. Utilizing historical race calendars, lap-time datasets, and high-frequency telemetry data via the FastF1 API, we analyze global footprint trends, quantify circuit layout stability using coefficient of variation metrics, and dissect micro-level driver performance across specific track sectors. Our findings demonstrate how regulation shifts and track alterations fundamentally reshape performance metrics, offering deep quantitative insights into the modern racing ecosystem.
+            What makes Formula 1 one of the most compelling sporting spectacles in the world? While many attribute this global obsession to high-speed engineering and driver rivalries, the true theater of the drama is the racetrack itself. This project explores the global fascination with F1 by shifting the focus entirely to circuit dynamics. Utilizing historical race data, lap-time volatility, and high-frequency sector telemetry gathered via the FastF1 API, we examine how the sheer architectural diversity and unpredictable evolution of racetracks capture the imaginations of millions of fans. Our multi-layered visual analysis demonstrates that the structural characteristics of a circuit do not merely host the race—they actively dictate the strategy, fuel the speed, and generate the edge-of-your-seat unpredictability that keeps fans fundamentally obsessed.
           </p>
         </div>
       </div>
@@ -56,30 +56,43 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">1. The Global Footprint of Formula 1 Venues</h2>
+    <h2 class="title is-3 has-text-centered">1. The Global Footprint: Endless Geographical Novelty</h2>
     <div class="content has-text-justified">
       <p>
-        Formula 1 has evolved from a predominantly European championship into a massive global spectacle. To understand the underlying infrastructure, we visualized the unique distribution of circuits across hosting nations alongside historical hosting frequencies. 
+        A key driver behind the global obsession with Formula 1 is that the championship is never monotonous. Unlike sports played on standardized courts or pitches, F1 introduces a completely new geographical canvas nearly every weekend. Fans are treated to an architectural spectrum ranging from sweeping, purist permanent race tracks to tight, unforgiving street circuits. To understand this baseline variety, we visualized the unique distribution of circuit designs across different hosting nations.
       </p>
     </div>
 
     <figure class="image has-text-centered">
       <img src="./static/images/Seu0.png" alt="F1 Circuits Hosted per Country" style="display: inline-block; width: 85%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 1.</strong> Distribution of unique F1 circuits hosted per country categorized by track type (Race, Street, and Road circuits). The USA leads with the most diverse set of venues.
+        <strong>Figure 1.</strong> The immense structural diversity of unique F1 circuits hosted by country, categorized by track environments (Race, Street, and Road circuits).
       </figcaption>
     </figure>
 
     <div class="content has-text-justified mt-4">
       <p>
-        While some nations like the United States have utilized an extensive array of distinct venues (12 unique tracks), other countries display immense historical loyalty to a handful of iconic layouts. 
+        This global tour creates a beautiful duality in the motorsport ecosystem. As shown in the data, some regions like the United States capture fan excitement through vast variety, utilizing 12 entirely unique venues over time. On the other end of the spectrum, countries like Italy choose to anchor their fans' obsession in rich historical heritage. Instead of scattering races across multiple locations, Italy concentrates an incredible historical density of Grands Prix on just a few iconic, legendary asphalt strips.
       </p>
     </div>
 
     <figure class="image has-text-centered">
       <img src="./static/images/Seu1.png" alt="Total Races vs Number of Circuits" style="display: inline-block; width: 85%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 2.</strong> Total races hosted against the number of unique circuits per country ($\times10$ scale). The gap represents venue loyalty, highlighting Italy's dense concentration of races across few historical circuits.
+        <strong>Figure 2.</strong> Total historical races hosted against the number of unique circuits ($\times10$ scale). The wide gap for nations like Italy signifies deep "venue loyalty," providing fans with generations of historical continuity and deep track attachment.
+      </figcaption>
+    </figure>
+
+    <div class="content has-text-justified mt-5">
+      <p>
+        The obsession deepens when we look beyond geography and analyze the internal anatomy of these tracks—specifically, how the type of circuit dictates its physical complexity. By breaking down the distribution of turns (corners) across Street, Race, and Road circuits, we discover that different track environments offer completely unique tactical challenges.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="./static/images/KakaoTalk_Photo_2026-05-17-22-54-28.png" alt="Turns Distribution by Circuit Type" style="display: inline-block; width: 90%; height: auto;">
+      <figcaption class="is-size-6 has-text-grey mt-2">
+        <strong>Figure 3.</strong> Statistical distribution and average number of turns across different circuit types. Street circuits exhibit the highest average ($19.2$ turns) and a much wider variation, providing an unpredictable labyrinth for drivers compared to more standardized permanent Race tracks ($15.6$ turns).
       </figcaption>
     </figure>
   </div>
@@ -87,7 +100,7 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">2. Macro Analysis: Circuit Layout Stability (2018–2024)</h2>
+    <h2 class="title is-3 " style="text-align: center;">2. Macro Analysis: Racetrack Layout Volatility</h2>
     <div class="content has-text-justified">
       <p>
         Track safety standards and modern architectural designs often require modifications to existing circuits. To quantify how consistent these venues remain, we conducted a <strong>Circuit Layout Stability Analysis</strong> across the entire calendar from 2018 to 2024 using the Coefficient of Variation ($CV$) of historical fast laps.
@@ -97,13 +110,13 @@
     <figure class="image has-text-centered">
       <img src="./static/images/KakaoTalk_Photo_2026-05-17-21-23-58.png" alt="F1 Circuit Layout Stability Analysis" style="width: 100%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 3.</strong> Stability categorization of F1 Grands Prix based on lap time volatility ($CV$). Tracks are clustered into Very Stable, Stable, and Variable domains.
+        <strong>Figure 4.</strong> Stability categorization of F1 Grands Prix based on lap time volatility ($CV$). Tracks are clustered into Very Stable, Stable, and Variable domains.
       </figcaption>
     </figure>
 
     <div class="content has-text-justified mt-4">
       <p>
-        Venues like the Italian and Austrian Grands Prix demonstrate extreme structural consistency ($CV < 1\%$), meaning the configuration has barely altered. Conversely, events like the Russian and Tuscan Grands Prix exhibit high volatility ($CV \ge 12\%$) due to rapid calendar shifts, short-lived appearances, or major tracking configuration changes.
+        Venues like the Italian and Austrian Grands Prix demonstrate extreme structural consistency ($CV < 1\%$), meaning the configuration has barely altered. Conversely, events like the Russian and Tuscan Grands Prix exhibit high volatility ($CV \ge 12\%$) due to rapid calendar shifts, short-lived appearances, or major tracking configuration changes. This architectural predictability vs. chaos is a major pillar of fan engagement.
       </p>
     </div>
   </div>
@@ -111,17 +124,30 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">3. Evolution of Speed: The Albert Park Transformation</h2>
+    <h2 class="title is-3 has-text-centered">3. Evolution of Speed: The Anatomy of a Layout Change</h2>
     <div class="content has-text-justified">
       <p>
-        To understand how macro layout changes translate to on-track timing, we isolated the <strong>Melbourne (Albert Park) Grand Prix</strong>. Prior to the 2022 race, the circuit underwent its most significant redesign since 1996, shortening the track from 5.303 km to 5.278 km and reducing the turn count from 16 to 14.
+        Why do track modifications create such intense anticipation among F1 fans? Racetracks are living architectures; even a minor alteration to a corner can fundamentally shift the mechanical balance and execution of speed. To explore this, we isolated iconic circuits that have undergone <strong>exactly one major layout modification</strong> in modern history, and analyzed how these structural redesigns rewrite the laws of velocity.
       </p>
     </div>
 
     <figure class="image has-text-centered">
-      <img src="./static/images/KakaoTalk_Photo_2026-05-17-20-16-53.png" alt="Melbourne Lap Time Trend" style="display: inline-block; width: 90%; height: auto;">
+      <img src="./static/images/yg1.png" alt="Circuits with exactly one layout change" style="display: inline-block; width: 90%; height: auto;">
       <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 4.</strong> Historical lap time trajectory for Albert Park (2018–2024). The structural layout alteration in 2022 triggered an immediate, substantial drop in both fastest laps and winner average laps.
+        <strong>Figure 5.</strong> Historical race count (2003–2024) for circuits that underwent exactly one layout change. Melbourne stands out as the most prominent street circuit in this rare category, hosting 20 historical races under this evolutionary framework.
+      </figcaption>
+    </figure>
+
+    <div class="content has-text-justified mt-5">
+      <p>
+        The prime example of this structural evolution is the <strong>Melbourne (Albert Park) Grand Prix</strong>. Prior to the 2022 race, the circuit underwent its most aggressive redesign since 1996, shortening the track length from 5.303 km to 5.278 km and deleting two entire corners (reducing the turn count from 16 to 14). By transforming slow, technical corners into a sweeping high-speed complex, the structural change triggered an immediate, historic leap in speed.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="./static/images/yg2.png" alt="Melbourne Lap Time Trend" style="display: inline-block; width: 95%; height: auto;">
+      <figcaption class="is-size-6 has-text-grey mt-2">
+        <strong>Figure 6.</strong> Historical lap time trajectory for Albert Park (2018–2024). The red vertical dashed line marks the 2022 layout redesign, which resulted in a massive, instantaneous drop in both the fastest lap and winner's average lap time—proving how spatial design directly fuels the racing drama.
       </figcaption>
     </figure>
   </div>
@@ -129,34 +155,34 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">4. Micro Analysis: Fast Lap Telemetry Comparison</h2>
+    <h2 class="title is-3 has-text-centered">4. Micro Analysis: The Symphony of Straights and Corners</h2>
     <div class="content has-text-justified">
       <p>
-        Going beneath aggregate lap times, we extracted high-frequency telemetry data to examine driver speed profiles across different circuit layouts. Below, we contrast the high-speed flowing dynamics of Albert Park against the demanding, technical braking zones of the Miami street layout.
+        Why are millions of fans truly obsessed with Formula 1? The ultimate answer lies in the dramatic structural contrast of a racetrack—the violent alternate between blazing straights and high-stakes cornering zones. To visually capture this thrill, we extracted the high-frequency telemetry data from the <strong>2026 Season Opener</strong> in Melbourne and contrasted it against one of the most <strong>Recent Grands Prix</strong> of the 2026 calendar in Miami, showcasing the fastest laps driven by the frontline contenders.
       </p>
     </div>
 
     <div class="columns is-centered">
       <div class="column">
         <div class="content">
-          <h3 class="title is-4 has-text-centered">Albert Park (George Russell)</h3>
+          <h3 class="title is-4 has-text-centered">2026 Season Opener: Melbourne (George Russell)</h3>
           <figure class="image">
             <img src="./static/images/F1_2026_Australia_Russell_Final.png" alt="George Russell Telemetry Australia">
           </figure>
           <p class="is-size-6 has-text-justified">
-            The telemetry profile of Albert Park reveals extended high-speed zones (dark red bands), particularly around the swept back-straight sections where cars consistently exceed 300 km/h.
+            In the 2026 season opener at Albert Park, George Russell's telemetry displays long, unbroken stretches of dark red. This indicates extended full-throttle straights where machines blast past 300 km/h, feeding the audience's appetite for pure, unadulterated speed. The layout seamlessly blends these straights into sweeping corners, requiring drivers to maintain immense momentum.
           </p>
         </div>
       </div>
 
       <div class="column">
         <div class="content">
-          <h3 class="title is-4 has-text-centered">Miami International Autodrome (Kimi Antonelli)</h3>
+          <h3 class="title is-4 has-text-centered">2026 Recent Race: Miami (Kimi Antonelli)</h3>
           <figure class="image">
             <img src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.png" alt="Kimi Antonelli Telemetry Miami">
           </figure>
           <p class="is-size-6 has-text-justified">
-            In contrast, Miami features severe deceleration vectors (yellow pockets) introducing tight cornering complexes immediately after blazing straights, highlighting the heavy mechanical setup demands of street venues.
+            In contrast, look at Kimi Antonelli's lap during the recent Miami Grand Prix. The drama here is born from severe deceleration. Brilliant yellow pockets show the heavy braking zones where drivers must rapidly shed speed to survive sharp, technical corners after soaring down massive straights. This continuous tactical battle between straight-line power and cornering precision is exactly what creates the heart-stopping excitement of F1.
           </p>
         </div>
       </div>
