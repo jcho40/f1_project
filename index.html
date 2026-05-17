@@ -3,14 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
-  <meta name="keywords" content="template, sample, html">
+        content="An in-depth data visualization analysis of Formula 1 circuits, layout stability, and telemetry trends.">
+  <meta name="keywords" content="Formula 1, F1, Data Visualization, Telemetry, Circuit Stability, FastF1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>F1 Project!!</title>
+  <title>F1 Circuit Evolution & Telemetry Analysis</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
@@ -23,20 +21,16 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">A Fancy Project Title</h1>
+          <h1 class="title is-1 publication-title">Speed, Space, and Stability:<br>A Data-Driven Exploration of Formula 1 Circuits</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              Jeonghwa Cho,,,<sup>1</sup> and
-            </span>
-            <span class="author-block">
-              Hong adsadsa<sup>1</sup>
+              <strong>Jeonghwa Cho</strong>, <strong>Seunghyun Ryu</strong>, <strong>Seohyun Kim</strong>, and <strong>Yonggyun Kim</strong>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>George Mason University Korea</span>
+            <span class="author-block">George Mason University Korea</span>
           </div>
-
         </div>
       </div>
     </div>
@@ -45,12 +39,125 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <p> This is a template AI-generated text. This section contains a comprehensive introduction to the project's core ideas and motivations. It presents the reader with an engaging overview of what the work is about, why it matters, and how it fits into the broader field. The text here outlines the key problem being addressed, highlights the opportunities and challenges, and sets the stage for the detailed developments in the following sections. It provides context by summarizing prior work or commonly encountered limitations, and articulates the unique contributions or novel approaches proposed. The narrative also emphasizes the potential impact of the project, both theoretically and practically, and may hint at empirical results or illustrative examples that will come later. By the end of this section, the reader should have a clear mental roadmap of what to expect: the objectives, the methodology, and the significance of the outcomes. </p>
+          <p>
+            Formula 1 represents the pinnacle of motorsport, where performance is determined by the complex interplay between engineering, driver skill, and circuit design. This project investigates the structural and dynamic characteristics of F1 circuits over time. Utilizing historical race calendars, lap-time datasets, and high-frequency telemetry data via the FastF1 API, we analyze global footprint trends, quantify circuit layout stability using coefficient of variation metrics, and dissect micro-level driver performance across specific track sectors. Our findings demonstrate how regulation shifts and track alterations fundamentally reshape performance metrics, offering deep quantitative insights into the modern racing ecosystem.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">1. The Global Footprint of Formula 1 Venues</h2>
+    <div class="content has-text-justified">
+      <p>
+        Formula 1 has evolved from a predominantly European championship into a massive global spectacle. To understand the underlying infrastructure, we visualized the unique distribution of circuits across hosting nations alongside historical hosting frequencies. 
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="./static/images/KakaoTalk_Photo_2026-05-17-20-05-43.png" alt="F1 Circuits Hosted per Country" style="display: inline-block; width: 85%; height: auto;">
+      <figcaption class="is-size-6 has-text-grey mt-2">
+        <strong>Figure 1.</strong> Distribution of unique F1 circuits hosted per country categorized by track type (Race, Street, and Road circuits). The USA leads with the most diverse set of venues.
+      </figcaption>
+    </figure>
+
+    <div class="content has-text-justified mt-4">
+      <p>
+        While some nations like the United States have utilized an extensive array of distinct venues (12 unique tracks), other countries display immense historical loyalty to a handful of iconic layouts. 
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="./static/images/KakaoTalk_Photo_2026-05-17-20-05-36.png" alt="Total Races vs Number of Circuits" style="display: inline-block; width: 85%; height: auto;">
+      <figcaption class="is-size-6 has-text-grey mt-2">
+        <strong>Figure 2.</strong> Total races hosted against the number of unique circuits per country ($\times10$ scale). The gap represents venue loyalty, highlighting Italy's dense concentration of races across few historical circuits.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">2. Macro Analysis: Circuit Layout Stability (2018–2024)</h2>
+    <div class="content has-text-justified">
+      <p>
+        Track safety standards and modern architectural designs often require modifications to existing circuits. To quantify how consistent these venues remain, we conducted a <strong>Circuit Layout Stability Analysis</strong> across the entire calendar from 2018 to 2024 using the Coefficient of Variation ($CV$) of historical fast laps.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="./static/images/KakaoTalk_Photo_2026-05-17-21-23-58.png" alt="F1 Circuit Layout Stability Analysis" style="width: 100%; height: auto;">
+      <figcaption class="is-size-6 has-text-grey mt-2">
+        <strong>Figure 3.</strong> Stability categorization of F1 Grands Prix based on lap time volatility ($CV$). Tracks are clustered into Very Stable, Stable, and Variable domains.
+      </figcaption>
+    </figure>
+
+    <div class="content has-text-justified mt-4">
+      <p>
+        Venues like the Italian and Austrian Grands Prix demonstrate extreme structural consistency ($CV < 1\%$), meaning the configuration has barely altered. Conversely, events like the Russian and Tuscan Grands Prix exhibit high volatility ($CV \ge 12\%$) due to rapid calendar shifts, short-lived appearances, or major tracking configuration changes.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">3. Evolution of Speed: The Albert Park Transformation</h2>
+    <div class="content has-text-justified">
+      <p>
+        To understand how macro layout changes translate to on-track timing, we isolated the <strong>Melbourne (Albert Park) Grand Prix</strong>. Prior to the 2022 race, the circuit underwent its most significant redesign since 1996, shortening the track from 5.303 km to 5.278 km and reducing the turn count from 16 to 14.
+      </p>
+    </div>
+
+    <figure class="image has-text-centered">
+      <img src="./static/images/KakaoTalk_Photo_2026-05-17-20-16-53.png" alt="Melbourne Lap Time Trend" style="display: inline-block; width: 90%; height: auto;">
+      <figcaption class="is-size-6 has-text-grey mt-2">
+        <strong>Figure 4.</strong> Historical lap time trajectory for Albert Park (2018–2024). The structural layout alteration in 2022 triggered an immediate, substantial drop in both fastest laps and winner average laps.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">4. Micro Analysis: Fast Lap Telemetry Comparison</h2>
+    <div class="content has-text-justified">
+      <p>
+        Going beneath aggregate lap times, we extracted high-frequency telemetry data to examine driver speed profiles across different circuit layouts. Below, we contrast the high-speed flowing dynamics of Albert Park against the demanding, technical braking zones of the Miami street layout.
+      </p>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">Albert Park (George Russell)</h3>
+          <figure class="image">
+            <img src="./static/images/F1_2026_Australia_Russell_Final.jpg" alt="George Russell Telemetry Australia">
+          </figure>
+          <p class="is-size-6 has-text-justified">
+            The telemetry profile of Albert Park reveals extended high-speed zones (dark red bands), particularly around the swept back-straight sections where cars consistently exceed 300 km/h.
+          </p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="content">
+          <h3 class="title is-4 has-text-centered">Miami International Autodrome (Kimi Antonelli)</h3>
+          <figure class="image">
+            <img src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.jpg" alt="Kimi Antonelli Telemetry Miami">
+          </figure>
+          <p class="is-size-6 has-text-justified">
+            In contrast, Miami features severe deceleration vectors (yellow pockets) introducing tight cornering complexes immediately after blazing straights, highlighting the heavy mechanical setup demands of street venues.
+          </p>
         </div>
       </div>
     </div>
@@ -59,149 +166,28 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-<h2 class="title is-3 has-text-centered">A Catchy Title for the First Section</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt lectus quis libero interdum, non facilisis sapien aliquet. Sed sit amet ex hendrerit, dignissim purus sit amet, blandit est. Integer nec mauris at dolor egestas volutpat. Quisque efficitur metus vitae dolor fermentum, quis varius neque consectetur.
-      </p>
-    <figure class="image has-text-centered">
-        <img src="./static/images/Template_bar.png"
-       alt="Playfair 1801 chart"
-       class="img-small75"
-       style="display: inline-block; width: 75%; height: auto;">
-      <figcaption class="is-size-6 has-text-grey">
-        Figure 1. Visual representation of the project’s workflow using the template bar.
-      </figcaption>
-    </figure>
+    <h2 class="title is-3 has-text-centered">Conclusion & Future Work</h2>
     <div class="content has-text-justified">
       <p>
-        Curabitur suscipit urna ut felis vulputate, nec dictum orci vehicula. Mauris aliquet, nunc et dignissim tincidunt, urna est tempus lacus, ut suscipit ex tellus a ipsum. Donec pretium tempor justo vitae molestie. Fusce ullamcorper leo id purus sodales, at cursus felis lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        Through this multi-layered visualization project, we demonstrated that F1 track architecture directly dictates the limits of vehicular performance. From global macro trends indicating regional distributions to fine-grained telemetry tracking throttle profiles, visual analytics serves as a powerful bridge to simplify intricate motorsports telemetry data. 
       </p>
-    </div>
-  </div>
-</section>
-
-  <section class="section">
-  <div class="container is-max-desktop">
-<h2 class="title is-3 has-text-centered">A Catchy Title for the First Section</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt lectus quis libero interdum, non facilisis sapien aliquet. Sed sit amet ex hendrerit, dignissim purus sit amet, blandit est. Integer nec mauris at dolor egestas volutpat. Quisque efficitur metus vitae dolor fermentum, quis varius neque consectetur.
-      </p>
-    <div class="content has-text-justified">
-      <p>
-        Curabitur suscipit urna ut felis vulputate, nec dictum orci vehicula. Mauris aliquet, nunc et dignissim tincidunt, urna est tempus lacus, ut suscipit ex tellus a ipsum. Donec pretium tempor justo vitae molestie. Fusce ullamcorper leo id purus sodales, at cursus felis lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-      </p>
-    </div>
-  </div>
-</section>
-  
-
-<section class="section">
-<div class="container is-max-desktop">
-  <div class="columns is-centered">
-
-    <!-- Feature A -->
-    <div class="column">
-      <div class="content">
-        <h2 class="title is-3 has-text-centered">Feature A</h2>
-        <p>
-          In this section, we introduce Feature A, a core component of the project that plays a pivotal role in achieving the overall goals. The importance of this feature stems from its ability to bridge critical gaps in existing workflows, deliver performance enhancements, and unlock new possibilities for visualization, analysis, or interactivity.
-        </p>
-        <!-- Optional media/image/video goes here -->
-        <!-- <img src="./static/images/featureA.png" alt="Feature A illustration"> -->
-      </div>
-    </div>
-    <!-- /Feature A -->
-
-    <!-- Feature B -->
-    <div class="column">
-      <div class="content">
-        <h2 class="title is-3 has-text-centered">Feature B</h2>
-        <p>
-          Feature B is also important. In this section, we introduce Feature B, another core component of the project that plays a pivotal role in achieving the overall goals. The importance of this feature stems from its ability to bridge critical gaps in existing workflows, deliver performance enhancements, and unlock new possibilities for visualization, analysis, or interactivity.
-        </p>
-        <!-- Optional media/image/video goes here -->
-        <!-- <img src="./static/images/featureB.png" alt="Feature B illustration"> -->
-      </div>
-    </div>
-    <!-- /Feature B -->
-
-  </div>
-</div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-<h2 class="title is-3 has-text-centered">Another Catchy Title for the Second Section</h2>
-    <figure class="image has-text-centered">
-      <img src="./static/images/waterfall_example.png" alt="Template bar illustration">
-<figcaption class="is-size-6 has-text-grey">
-  Figure 2. Waterfall chart, which shows the cumulative breakdown of changes (positive and negative) across different categories, illustrating how each step contributes to the final total.  
-</figcaption>
-    </figure>
-
-    <div class="content has-text-justified">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt lectus quis libero interdum, non facilisis sapien aliquet. Sed sit amet ex hendrerit, dignissim purus sit amet, blandit est. Integer nec mauris at dolor egestas volutpat. Quisque efficitur metus vitae dolor fermentum, quis varius neque consectetur. Curabitur suscipit urna ut felis vulputate, nec dictum orci vehicula. Mauris aliquet, nunc et dignissim tincidunt, urna est tempus lacus, ut suscipit ex tellus a ipsum. Donec pretium tempor justo vitae molestie. Fusce ullamcorper leo id purus sodales, at cursus felis lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        Moving forward, we plan to incorporate predictive machine learning frameworks (such as XGBoost or CatBoost models) to project historical lap time trajectories against newly proposed future track modifications, providing actionable analytical predictive models for track design assessments.
       </p>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="container is-max-desktop">
-<h2 class="title is-3 has-text-centered">Another Catchy Title for the Third Section</h2>
-    <figure class="image has-text-centered">
-<div style="text-align: center;">
-  <img src="./static/images/P_05-playfair-1801-plate1.png"
-       alt="Playfair 1801 chart"
-       class="img-small75"
-       style="display: inline-block; width: 75%; height: auto;">
-</div>
-<figcaption class="is-size-6 has-text-grey">
-  Figure 3. William Playfair's 1801 'Chart of the Extent, Population and Revenue of the Principal Nations of Europe.' The central pie displays each nation's share of European land area, while red and yellow radial bars show, respectively, population size and annual government revenue. First printed in <em>The Statistical Breviary</em>, it is widely regarded as the earliest known multi-slice pie chart and highlights the contrast between territorial extent, demographic weight, and fiscal power.
-</figcaption>
-
-    </figure>
-
-    <div class="content has-text-justified">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tincidunt lectus quis libero interdum, non facilisis sapien aliquet. Sed sit amet ex hendrerit, dignissim purus sit amet, blandit est. Integer nec mauris at dolor egestas volutpat. Quisque efficitur metus vitae dolor fermentum, quis varius neque consectetur. Curabitur suscipit urna ut felis vulputate, nec dictum orci vehicula. Mauris aliquet, nunc et dignissim tincidunt, urna est tempus lacus, ut suscipit ex tellus a ipsum. Donec pretium tempor justo vitae molestie. Fusce ullamcorper leo id purus sodales, at cursus felis lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Outro</h2>
-    <div class="content">
-      <p>
-        This is the last section. In this part, we bring together all the ideas explored throughout the project, reflecting on what was learned, what worked well, and what challenges emerged. We revisit the core objectives, summarizing how each was addressed, and highlight the most significant insights that have arisen from the work. Moreover, we outline how the outcomes contribute to the broader field, what implications they may have for future research or real-world applications, and why these findings matter. In addition, this section proposes concrete next steps: further experiments, methods refinement, validation on new datasets, collaborative extensions, or deployment scenarios. We also discuss potential limitations, acknowledge open questions, and suggest areas that merit deeper investigation.
-      </p>
-    </div>
-  </div>
-</section>
-
-  <section class="section">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">References and Data Sources</h2>
     <div class="content has-text-justified">
-  <p>  
-    1. Black, Joe; Doe, Jane; and Lee, Maria. “Template Paper Title on Data Analysis.” <em>Journal of Data Analysis & Visualization</em> 30, no. 1 (2023): 100-120.  
-  </p>
-  <p>  
-    2. White, Chris; Green, Anna; and Kim, Sam. “Template Methods for Interactive Dashboards.” <em>International Journal of Interactive Visualization</em> 25, no. 2 (2022): 210-234.  
-  </p>
-  <p>  
-    3. Miller, Pat; Gomez, Sofia; and Zhang, Lin. “Template Techniques for Labels & Annotation in Multidimensional Graphs.” <em>Computational Graphics & Data Systems</em> 12, no. 3 (2024): 45-70.  
-  </p>
-  <p>  
-    4. Wright, Ben; Park, Soo; and O’Neil, Pat. “Template Approaches to Temporal Flow Visualization.” <em>Decision Support & Data Analytics</em> 14, no. 3 (2021): 300-320.  
-  </p>
+      <p>1. FastF1 Python Package Library Core Development Team. "Accessing High-Frequency Timing and Telemetry Data in Formula 1." <em>Open Source Motorsports Analytics</em> (2023-2025).</p>
+      <p>2. FIA Formula 1 World Championship Historical Regulations and Circuit Appendices (2018–2024).</p>
+      <p>3. Dynamic Data Visualizations inspired by William Playfair's principles of territorial and thematic comparisons applied to modern sporting infrastructure analytics.</p>
     </div>
   </div>
 </section>
-
 
 <footer class='footer footer-compact'>
   <div class="container">
@@ -210,17 +196,11 @@
        This website was created as coursework for <strong>CDS 301 / 501: Scientific Information and Data Visualization (Fall 2025) at George Mason Korea</strong>.
       </p>
       <p>
-        This website is licensed under a <a rel="license"
-        href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-      </p>
-      <p>
-        Template design is based on the example site available at <a href="https://utkuozbulak.github.io/cds_301_template_website/" target="_blank" rel="noopener">CDS 301 Template Website</a>, which itself uses a layout from the <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies project site</a>.
+        This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
       </p>
     </div>
   </div>
 </footer>
 
-
 </body>
 </html>
-
