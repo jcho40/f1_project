@@ -1,242 +1,989 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="An in-depth data visualization analysis of Formula 1 circuits, focusing on why fans are obsessed with racetrack anatomy and speed dynamics.">
+  <meta name="description" content="An in-depth data visualization analysis of Formula 1 circuits, focusing on why fans are obsessed with racetrack anatomy and speed dynamics.">
   <meta name="keywords" content="Formula 1, F1, Data Visualization, Telemetry, Circuit Stability, FastF1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Why Fans Love F1 Tracks</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Barlow+Condensed:wght@300;400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===================== VARIABLES ===================== */
+    :root {
+      --f1-red:    #E8002D;
+      --f1-dark:   #0F0F0F;
+      --f1-grey:   #1A1A1A;
+      --f1-mid:    #2A2A2A;
+      --f1-silver: #C0C0C0;
+      --f1-white:  #F4F4F4;
+      --f1-yellow: #FFF200;
+      --accent:    #E8002D;
+      --body-bg:   #F7F5F2;
+      --text-dark: #1A1A1A;
+      --text-mid:  #444;
+      --section-bg:#FFFFFF;
+    }
+
+    /* ===================== RESET / BASE ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      background: var(--body-bg);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===================== CHECKERED UTILITIES ===================== */
+    .checkered {
+      background-image:
+        repeating-conic-gradient(#000 0% 25%, #fff 0% 50%);
+      background-size: 16px 16px;
+    }
+    .checkered-sm {
+      background-image:
+        repeating-conic-gradient(#000 0% 25%, transparent 0% 50%);
+      background-size: 10px 10px;
+    }
+
+    /* ===================== TOP TICKER BAR ===================== */
+    .ticker-bar {
+      background: var(--f1-red);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 6px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 28s linear infinite;
+      padding-left: 100%;
+    }
+    .ticker-inner span { margin: 0 3rem; }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      position: relative;
+      background: var(--f1-dark);
+      overflow: hidden;
+      padding: 0;
+    }
+
+    /* Animated speed lines behind everything */
+    .speed-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .speed-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,0,45,0.4), transparent);
+      animation: speedLine 2.4s linear infinite;
+      opacity: 0;
+    }
+    @keyframes speedLine {
+      0%   { transform: translateX(-120%); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateX(120%); opacity: 0; }
+    }
+
+    /* Checkered flag stripe at very top of hero */
+    .hero-flag-stripe {
+      height: 18px;
+      width: 100%;
+    }
+
+    /* Red accent bar */
+    .hero-red-bar {
+      height: 5px;
+      background: var(--f1-red);
+      width: 100%;
+    }
+
+    /* Main hero body */
+    .hero-body {
+      position: relative;
+      z-index: 2;
+      padding: 4rem 1.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* F1 badge / wordmark */
+    .f1-wordmark {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s ease both;
+    }
+    .f1-badge {
+      display: flex;
+      align-items: center;
+      background: var(--f1-red);
+      padding: 4px 14px;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .f1-badge span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.7rem;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+    .f1-tag {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--f1-silver);
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--f1-white);
+      text-align: center;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+    .hero-title em {
+      color: var(--f1-red);
+      font-style: normal;
+    }
+
+    .hero-authors {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--f1-silver);
+      text-transform: uppercase;
+      text-align: center;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
+    .hero-university {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
+      color: #888;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(22px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* ===================== ANIMATED RACE TRACK ===================== */
+    .race-track-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: var(--f1-dark);
+      padding-bottom: 0.5rem;
+    }
+
+    /* asphalt texture strip */
+    .track-road {
+      position: relative;
+      height: 56px;
+      background: #222;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .track-road::before {
+      content:'';
+      position: absolute;
+      top: 50%; left: 0; right: 0;
+      height: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        #fff 0px, #fff 30px,
+        transparent 30px, transparent 60px
+      );
+      transform: translateY(-50%);
+      animation: dashMove 1.2s linear infinite;
+    }
+    @keyframes dashMove {
+      from { background-position: 0 0; }
+      to   { background-position: 60px 0; }
+    }
+
+    /* track edge lines */
+    .track-road::after {
+      content:'';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--f1-red);
+    }
+
+    .track-bottom-line {
+      height: 4px;
+      background: var(--f1-red);
+    }
+
+    /* F1 Car SVG — animated across track */
+    .car-wrapper {
+      position: absolute;
+      bottom: 8px;
+      animation: carRun 6s linear infinite;
+      z-index: 10;
+      filter: drop-shadow(0 0 10px rgba(232,0,45,0.7));
+    }
+    @keyframes carRun {
+      0%   { left: -200px; }
+      100% { left: calc(100% + 200px); }
+    }
+
+    /* Exhaust particle system */
+    .exhaust {
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 3px;
+    }
+    .exhaust-particle {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--f1-red);
+      animation: exhaust 0.4s linear infinite;
+      opacity: 0;
+    }
+    .exhaust-particle:nth-child(2) { animation-delay: 0.13s; background: #ff6b00; }
+    .exhaust-particle:nth-child(3) { animation-delay: 0.26s; background: rgba(255,100,0,0.4); }
+    @keyframes exhaust {
+      0%   { opacity: 1; transform: translateX(0) scale(1); }
+      100% { opacity: 0; transform: translateX(-20px) scale(0.2); }
+    }
+
+    /* ===================== NAV / SECTION DIVIDER ===================== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin: 0;
+      height: 8px;
+    }
+    .div-red   { flex: 1; height: 100%; background: var(--f1-red); }
+    .div-black { width: 40px; height: 100%; background: var(--f1-dark); }
+    .div-grey  { flex: 2; height: 100%; background: #ddd; }
+
+    /* ===================== SECTIONS ===================== */
+    .content-section {
+      background: var(--section-bg);
+      padding: 4rem 1.5rem;
+    }
+    .content-section:nth-child(even) {
+      background: #FAFAF9;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Section heading with red underline bar */
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--f1-dark);
+      text-align: center;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+    .section-title-bar {
+      width: 60px; height: 4px;
+      background: var(--f1-red);
+      margin: 0.5rem auto 2rem;
+      clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 100%, 0% 100%);
+    }
+
+    /* Abstract card */
+    .abstract-card {
+      background: var(--f1-dark);
+      color: var(--f1-white);
+      border-left: 4px solid var(--f1-red);
+      padding: 2rem 2.5rem;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .abstract-card::before {
+      content: '"';
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10rem;
+      font-weight: 900;
+      color: rgba(232,0,45,0.12);
+      position: absolute;
+      top: -2rem; left: 1rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .abstract-card p {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Body text */
+    .body-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+    }
+    .body-text strong { color: var(--text-dark); font-weight: 600; }
+
+    /* Figures */
+    .figure-wrap {
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+    .figure-wrap img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #E8E8E8;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .figure-caption {
+      margin-top: 0.75rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.85rem;
+      color: #777;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .figure-caption strong {
+      color: var(--f1-red);
+      font-weight: 700;
+    }
+    .fig-label {
+      display: inline-block;
+      background: var(--f1-red);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 2px 8px;
+      margin-bottom: 0.5rem;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    /* Stat callout boxes */
+    .stat-strip {
+      display: flex;
+      gap: 1px;
+      margin: 2rem 0;
+      overflow: hidden;
+      border-radius: 3px;
+    }
+    .stat-box {
+      flex: 1;
+      background: var(--f1-dark);
+      color: #fff;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .stat-box:nth-child(2) { background: var(--f1-red); }
+    .stat-box:nth-child(3) { background: #2A2A2A; }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    /* Sub-section heading */
+    .sub-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--f1-dark);
+      text-align: center;
+      margin: 3rem 0 0.3rem;
+    }
+    .sub-title-bar {
+      width: 40px; height: 3px;
+      background: var(--f1-red);
+      margin: 0.3rem auto 1.5rem;
+    }
+
+    /* Telemetry side-by-side */
+    .telem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 680px) {
+      .telem-grid { grid-template-columns: 1fr; }
+    }
+    .telem-card {
+      border-top: 3px solid var(--f1-red);
+      background: var(--f1-dark);
+      padding: 0 0 1rem;
+      color: #fff;
+    }
+    .telem-label {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.6rem 1rem;
+      background: #1A1A1A;
+      color: var(--f1-silver);
+    }
+    .telem-card img { width: 100%; display: block; }
+    .telem-desc {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      padding: 0.8rem 1rem 0;
+      color: #bbb;
+    }
+
+    /* References */
+    .ref-section {
+      background: var(--f1-dark);
+      padding: 3rem 1.5rem;
+      color: var(--f1-silver);
+    }
+    .ref-section .section-title { color: var(--f1-white); }
+    .ref-list {
+      list-style: none;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .ref-list li {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #2A2A2A;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .ref-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--f1-red);
+      min-width: 1.5rem;
+      flex-shrink: 0;
+    }
+    .ref-list a { color: #8BB5D4; }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--f1-dark);
+      border-top: 1px solid #222;
+    }
+    .footer-flag {
+      height: 14px;
+    }
+    .footer-inner {
+      padding: 1.5rem 1.5rem;
+      text-align: center;
+    }
+    .footer-inner p {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.8rem;
+      color: #666;
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+    }
+    .footer-inner a { color: var(--f1-red); }
+    .footer-logo-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ===================== PROGRESS / SCROLL INDICATOR ===================== */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: var(--f1-red);
+      z-index: 9999;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* ===================== PITSTOP DIVIDER ===================== */
+    .pitstop-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      background: var(--f1-dark);
+    }
+    .pit-line { flex: 1; height: 1px; background: #333; }
+    .pit-icon {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--f1-red);
+      text-transform: uppercase;
+    }
+
+  </style>
 </head>
 <body>
 
-<section class="hero">
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span>🏁 Why Fans Love F1 Tracks</span>
+    <span>◆ FastF1 Telemetry Analysis</span>
+    <span>◆ George Mason University Korea</span>
+    <span>◆ CDS 301 / 501 · Data Visualization</span>
+    <span>◆ Jeonghwa Cho · Seunghyun Ryu · Seohyun Kim · Yonggyun Kim</span>
+    <span>◆ Circuit Architecture · Speed Dynamics · Track Evolution</span>
+    <span>◆ Melbourne · Miami · Albert Park · Monza</span>
+    <span>🏁 Why Fans Love F1 Tracks</span>
+    <span>◆ FastF1 Telemetry Analysis</span>
+    <span>◆ George Mason University Korea</span>
+    <span>◆ CDS 301 / 501 · Data Visualization</span>
+    <span>◆ Jeonghwa Cho · Seunghyun Ryu · Seohyun Kim · Yonggyun Kim</span>
+    <span>◆ Circuit Architecture · Speed Dynamics · Track Evolution</span>
+    <span>◆ Melbourne · Miami · Albert Park · Monza</span>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <!-- Speed lines -->
+  <div class="speed-lines" id="speedLines"></div>
+
+  <!-- Checkered stripe top -->
+  <div class="hero-flag-stripe checkered"></div>
+  <div class="hero-red-bar"></div>
+
   <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Why Fans Love F1 Tracks</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <strong>Jeonghwa Cho</strong>, <strong>Seunghyun Ryu</strong>, <strong>Seohyun Kim</strong>, and <strong>Yonggyun Kim</strong>
-            </span>
-          </div>
+    <!-- F1 Wordmark -->
+    <div class="f1-wordmark">
+      <div class="f1-badge"><span>F1</span></div>
+      <div>
+        <div class="f1-tag">Data Visualization Project</div>
+        <div class="f1-tag" style="color:#666;">CDS 301 / 501 · Fall 2025</div>
+      </div>
+    </div>
 
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">George Mason University Korea</span>
-          </div>
+    <h1 class="hero-title">Why Fans <em>Love</em><br>F1 Tracks</h1>
+
+    <div class="hero-authors">
+      Jeonghwa Cho &nbsp;·&nbsp; Seunghyun Ryu &nbsp;·&nbsp; Seohyun Kim &nbsp;·&nbsp; Yonggyun Kim
+    </div>
+    <div class="hero-university">George Mason University Korea</div>
+  </div>
+
+  <!-- Animated race track with car -->
+  <div class="race-track-wrapper">
+    <div class="track-road" id="trackRoad">
+      <!-- Car SVG -->
+      <div class="car-wrapper" id="raceCar">
+        <!-- Exhaust -->
+        <div class="exhaust">
+          <div class="exhaust-particle"></div>
+          <div class="exhaust-particle"></div>
+          <div class="exhaust-particle"></div>
         </div>
+        <!-- F1 Car SVG (top-down simplified) -->
+        <svg width="120" height="38" viewBox="0 0 120 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- rear wing -->
+          <rect x="2" y="8" width="10" height="22" rx="1" fill="#C0C0C0"/>
+          <rect x="2" y="5" width="10" height="4" rx="1" fill="#E8002D"/>
+          <rect x="2" y="29" width="10" height="4" rx="1" fill="#E8002D"/>
+          <!-- rear tyres -->
+          <rect x="5" y="2" width="12" height="8" rx="3" fill="#222"/>
+          <rect x="5" y="28" width="12" height="8" rx="3" fill="#222"/>
+          <!-- sidepods -->
+          <path d="M15 10 Q22 6 55 7 L55 11 Q30 11 18 14 Z" fill="#1A1A1A"/>
+          <path d="M15 28 Q22 32 55 31 L55 27 Q30 27 18 24 Z" fill="#1A1A1A"/>
+          <!-- main body -->
+          <path d="M12 14 Q40 10 80 13 Q100 14 108 19 Q100 24 80 25 Q40 28 12 24 Z" fill="#E8002D"/>
+          <!-- cockpit area -->
+          <ellipse cx="62" cy="19" rx="14" ry="5.5" fill="#111"/>
+          <ellipse cx="62" cy="19" rx="11" ry="4" fill="#1A1A1A"/>
+          <!-- Halo -->
+          <path d="M54 17 Q62 14 70 17" stroke="#888" stroke-width="2" fill="none"/>
+          <!-- front nose -->
+          <path d="M80 15 Q98 17 115 19 Q98 21 80 23 Z" fill="#C0C0C0"/>
+          <!-- front wing -->
+          <rect x="108" y="8" width="8" height="22" rx="1" fill="#C0C0C0"/>
+          <rect x="108" y="5" width="10" height="3" rx="1" fill="#E8002D"/>
+          <rect x="108" y="30" width="10" height="3" rx="1" fill="#E8002D"/>
+          <!-- front tyres -->
+          <rect x="99" y="2" width="12" height="8" rx="3" fill="#222"/>
+          <rect x="99" y="28" width="12" height="8" rx="3" fill="#222"/>
+          <!-- team number -->
+          <text x="48" y="21" font-family="'Barlow Condensed',sans-serif" font-weight="900" font-size="9" fill="white" letter-spacing="-0.5">44</text>
+          <!-- wheel spin circles -->
+          <circle cx="11" cy="6" r="3.5" fill="#555" stroke="#333" stroke-width="1"/>
+          <circle cx="11" cy="32" r="3.5" fill="#555" stroke="#333" stroke-width="1"/>
+          <circle cx="105" cy="6" r="3.5" fill="#555" stroke="#333" stroke-width="1"/>
+          <circle cx="105" cy="32" r="3.5" fill="#555" stroke="#333" stroke-width="1"/>
+        </svg>
       </div>
     </div>
+    <div class="track-bottom-line"></div>
   </div>
-</section>
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            What makes Formula 1 one of the most compelling sporting spectacles in the world? While many attribute this global obsession to high-speed engineering and driver rivalries, the true theater of the drama is the racetrack itself. This project explores the global fascination with F1 by shifting the focus entirely to circuit dynamics. Utilizing historical race data, lap-time volatility, and high-frequency sector telemetry gathered via the FastF1 API, we examine how the sheer architectural diversity and unpredictable evolution of racetracks capture the imaginations of millions of fans. Our multi-layered visual analysis demonstrates that the structural characteristics of a circuit do not merely host the race—they actively dictate the strategy, fuel the speed, and generate the edge-of-your-seat unpredictability that keeps fans fundamentally obsessed.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- Red + checkered footer of hero -->
+  <div class="hero-red-bar"></div>
+  <div class="hero-flag-stripe checkered"></div>
+</div>
 
-<hr>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Track Types and National Strategies</h2>
-    <div class="content has-text-justified">
-      <p>
-        The Isotype chart shows how countries differ in the kinds of F1 venues they host: permanent race circuits, temporary street circuits, and road circuits. The United States leads in sheer variety with 12 distinct circuits, reflecting a strategy of rotating venues across eras rather than relying on a single flagship track.
-      </p>
-      <p>
-        Most countries anchor their calendars with purpose-built race circuits, providing continuity and consistent infrastructure. Street circuits remain uncommon and regionally concentrated (notably in the U.S.), while traditional motorsport nations like Italy and the United Kingdom maintain a strong presence on the calendar despite using only a few unique tracks each.
-      </p>
-    </div>
-
-    <figure class="image has-text-centered">
-      <img src="./static/images/Seu0.png" alt="F1 Circuits Hosted per Country" style="display: inline-block; width: 85%; height: auto;">
-      <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 1.</strong> The immense structural diversity of unique F1 circuits hosted by country, categorized by track environments (Race, Street, and Road circuits).
-      </figcaption>
-    </figure>
-
-    <div class="content has-text-justified mt-4">
-      <p>
-        This global tour creates a beautiful duality in the motorsport ecosystem. As shown in the data, some regions like the United States capture fan excitement through vast variety, utilizing 12 entirely unique venues over time. On the other end of the spectrum, countries like Italy choose to anchor their fans' obsession in rich historical heritage. Instead of scattering races across multiple locations, Italy concentrates an incredible historical density of Grands Prix on just a few iconic, legendary asphalt strips.
-      </p>
-    </div>
-
-    <!-- 수정된 부분: 제목을 Seu1.png 위로 이동 및 가운데 정렬 적용 -->
-    <h2 class="title is-3 has-text-centered" style="margin-top: 2rem; margin-bottom: 1.5rem;">Venue Count vs. Venue Loyalty</h2>
-
-    <figure class="image has-text-centered">
-      <img src="./static/images/Seu1.png" alt="Total Races vs Number of Circuits" style="display: inline-block; width: 85%; height: auto;">
-      <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 2.</strong> Total historical races hosted against the number of unique circuits (10 times scale). The wide gap for nations like Italy signifies deep venue loyalty—concentrating many races at a few enduring venues—whereas countries with many distinct circuits reflect a strategy of geographic expansion and rotation.
-      </figcaption>
-    </figure>
-
-    <div class="content has-text-justified mt-3">
-      <p>
-        The dumbbell chart compares how many distinct circuits a country has hosted against how intensively those circuits were used over time. Italy exemplifies strong venue loyalty: a high total of races concentrated across just a few physical circuits, driven largely by Monza’s recurrent role. By contrast, the United States shows high circuit turnover—many distinct venues but a lower total race count—indicating frequent rotation and shorter-lived tracks.
-      </p>
-      <p>
-        France shows a similar pattern of expansion exceeding sustained use, while faded entries for former hosts like Germany and Argentina underscore historical phases that no longer shape the modern calendar. These patterns highlight two strategic paths: concentrate races at a few enduring venues for legacy and continuity, or spread events across many venues to pursue growth and regional reach.
-      </p>
-    </div>
-
-    <figure class="image has-text-centered">
-      <img src="./static/images/sh2.png" alt="Turns Distribution by Circuit Type" class="large-figure">
-      <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 3.</strong> Distribution and average number of turns across different circuit types. Street circuits exhibit the highest average number of turns and the widest variability, establishing them as the structurally most complex venues on the F1 calendar.
-      </figcaption>
-    </figure>
-
-    <div class="content has-text-justified mt-5">
-      <p>
-        Does this structural complexity directly change the pacing of a Grand Prix? To answer this, we analyzed the direct correlation between the volume of turns and the resulting <strong>Average Best Lap Times</strong>. The data reveals a clear, progressive penalty on time as the circuit layout becomes more intricate.
-      </p>
-    </div>
-
-    <figure class="image has-text-centered">
-      <img src="./static/images/sh1.png" alt="More Turns More Time Bar Chart" class="large-figure">
-      <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 4.</strong> Comparison of average best lap times categorized by the number of turns. Building on layout differences, this clear positive correlation demonstrates that higher circuit complexity (more turns) directly causes lap times to significantly lengthen, justifying the need for distinct race strategies.
-      </figcaption>
-    </figure>
-
-    <div class="content has-text-justified mt-4">
-      <p>
-        As the visualization demonstrates, tracks with few corners ($\le13$) yield blistering fast laps averaging $70.3$ seconds. However, as the turn count climbs into the "Many" category ($\ge18$), the average lap time stretches significantly to $90.9$ seconds. This physical reality forces teams into a high-stakes compromise: do they setup the car for pure straight-line velocity, or maximize downforce for cornering precision? This architectural tension is exactly why every circuit tells a completely different story.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Single Layout Revisions: Persistence and Impact</h2>
-    <div class="content has-text-justified">
-      <p>
-        To clearly understand how a layout change affects lap times, we gathered circuits that modified their track configuration exactly once between 2003 and 2024. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively, showing that a single layout revision does not push a circuit off the calendar.
-      </p>
-    </div>
-
-    <figure class="image has-text-centered">
-      <img src="./static/images/yg1.png" alt="Circuits with exactly one layout change" style="display: inline-block; width: 90%; height: auto;">
-      <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 5.</strong> Historical race count (2003–2024) for circuits that underwent exactly one layout change. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">3. Evolution of Speed: The Anatomy of a Layout Change</h2>
-    <div class="content has-text-justified">
-      <p>
-        Why do track modifications create such intense anticipation among F1 fans? Racetracks are living architectures; even a minor alteration to a corner can fundamentally shift the mechanical balance and execution of speed. To explore this, we isolated iconic circuits that have undergone <strong>exactly one major layout modification</strong> in modern history, and analyzed how these structural redesigns rewrite the laws of velocity.
-      </p>
-    </div>
-
-    <div class="content has-text-justified mt-5">
-      <p>
-        The prime example of this structural evolution is the <strong>Melbourne (Albert Park) Grand Prix</strong>. Prior to the 2022 race, the circuit underwent its most aggressive redesign since 1996, shortening the track length from 5.303 km to 5.278 km and deleting two entire corners (reducing the turn count from 16 to 14). By transforming slow, technical corners into a sweeping high-speed complex, the structural change triggered an immediate, historic leap in speed.
-      </p>
-    </div>
-
-    <figure class="image has-text-centered">
-      <img src="./static/images/yg2.png" alt="Melbourne Lap Time Trend" style="display: inline-block; width: 95%; height: auto;">
-      <figcaption class="is-size-6 has-text-grey mt-2">
-        <strong>Figure 7.</strong> Fastest lap (solid red) and winner's average lap (dashed blue) at Melbourne's Albert Park Circuit, 2018–2024. No data is available for 2020 and 2021 due to the cancellation of the Australian Grand Prix amid the COVID-19 pandemic. Note the gap between the two lines narrowing post-2022, suggesting increasingly competitive race pace. The 2024 season closed with an all-time circuit record of 1:19.813.
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Straights vs Corners: Telemetry Highlights</h2>
-    <div class="content has-text-justified">
-      <p>
-        The contrast between long straights and tight corners defines each circuit's character. Below are compact telemetry snapshots from Melbourne and Miami (2026) that illustrate how layouts drive different speed and braking demands.
-      </p>
-    </div>
-
-    <div class="content">
-      <div class="content">
-        <h3 class="title is-4 has-text-centered">2026 Melbourne (George Russell)</h3>
-        <figure class="image has-text-centered">
-          <img src="./static/images/F1_2026_Australia_Russell_Final.png" alt="George Russell Telemetry Australia" style="display:inline-block; width:85%; height:auto;">
-        </figure>
-        <p class="is-size-6 has-text-justified">
-          Albert Park shows long full-throttle sections exceeding 300 km/h, emphasizing momentum and high-speed flow between sweeping corners.
-        </p>
-      </div>
-
-      <div class="content" style="margin-top:1.25rem;">
-        <h3 class="title is-4 has-text-centered">2026 Miami (Kimi Antonelli)</h3>
-        <figure class="image has-text-centered">
-          <img src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.png" alt="Kimi Antonelli Telemetry Miami" style="display:inline-block; width:85%; height:auto;">
-        </figure>
-        <p class="is-size-6 has-text-justified">
-          Miami highlights heavy braking zones and tight technical corners that demand rapid deceleration and precise cornering setup.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Conclusion & Future Work</h2>
-    <div class="content has-text-justified">
-      <p>
-        Through this multi-layered visualization project, we demonstrated that F1 track architecture directly dictates the limits of vehicular performance. From global macro trends indicating regional distributions to fine-grained telemetry tracking throttle profiles, visual analytics serves as a powerful bridge to simplify intricate motorsports telemetry data. 
-      </p>
-      <p>
-        Moving forward, we plan to incorporate predictive machine learning frameworks (such as XGBoost or CatBoost models) to project historical lap time trajectories against newly proposed future track modifications, providing actionable analytical predictive models for track design assessments.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">References and Data Sources</h2>
-    <div class="content has-text-justified">
-      <p>1. FastF1 Python library. <em>FastF1</em>. Accessed via the FastF1 project documentation.</p>
-      <p>2. All circuit YAML files. f1db/f1db. GitHub. https://github.com/f1db/f1db</p>
-    </div>
-  </div>
-</section>
-
-<footer class='footer footer-compact'>
+<!-- ===== ABSTRACT ===== -->
+<div class="content-section">
   <div class="container">
-    <div class="content has-text-centered">
+    <h2 class="section-title">Abstract</h2>
+    <div class="section-title-bar"></div>
+    <div class="abstract-card">
       <p>
-       This website was created as coursework for <strong>CDS 301 / 501: Scientific Information and Data Visualization (Fall 2025) at George Mason Korea</strong>.
-      </p>
-      <p>
-        This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        What makes Formula 1 one of the most compelling sporting spectacles in the world? While many attribute this global obsession to high-speed engineering and driver rivalries, the true theater of the drama is the racetrack itself. This project explores the global fascination with F1 by shifting the focus entirely to circuit dynamics. Utilizing historical race data, lap-time volatility, and high-frequency sector telemetry gathered via the FastF1 API, we examine how the sheer architectural diversity and unpredictable evolution of racetracks capture the imaginations of millions of fans. Our multi-layered visual analysis demonstrates that the structural characteristics of a circuit do not merely host the race—they actively dictate the strategy, fuel the speed, and generate the edge-of-your-seat unpredictability that keeps fans fundamentally obsessed.
       </p>
     </div>
+
+    <!-- Quick stat strip -->
+    <div class="stat-strip">
+      <div class="stat-box">
+        <span class="stat-num">70.3s</span>
+        <span class="stat-label">Avg lap — few corners</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">90.9s</span>
+        <span class="stat-label">Avg lap — many corners</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">21+</span>
+        <span class="stat-label">Races at Albert Park</span>
+      </div>
+    </div>
   </div>
+</div>
+
+<!-- pitstop divider -->
+<div class="pitstop-divider">
+  <div class="pit-line"></div>
+  <div class="pit-icon">Section 1 · Track Types</div>
+  <div class="pit-line"></div>
+</div>
+
+<!-- ===== SECTION: Track Types ===== -->
+<div class="content-section">
+  <div class="container">
+    <h2 class="section-title">Track Types and National Strategies</h2>
+    <div class="section-title-bar"></div>
+
+    <p class="body-text">
+      The Isotype chart shows how countries differ in the kinds of F1 venues they host: permanent race circuits, temporary street circuits, and road circuits. The United States leads in sheer variety with 12 distinct circuits, reflecting a strategy of rotating venues across eras rather than relying on a single flagship track.
+    </p>
+    <p class="body-text">
+      Most countries anchor their calendars with purpose-built race circuits, providing continuity and consistent infrastructure. Street circuits remain uncommon and regionally concentrated (notably in the U.S.), while traditional motorsport nations like Italy and the United Kingdom maintain a strong presence on the calendar despite using only a few unique tracks each.
+    </p>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 1</div>
+      <img src="./static/images/Seu0.png" alt="F1 Circuits Hosted per Country">
+      <div class="figure-caption">
+        <strong>Figure 1.</strong> The immense structural diversity of unique F1 circuits hosted by country, categorized by track environments (Race, Street, and Road circuits).
+      </div>
+    </div>
+
+    <p class="body-text">
+      This global tour creates a beautiful duality in the motorsport ecosystem. As shown in the data, some regions like the United States capture fan excitement through vast variety, utilizing 12 entirely unique venues over time. On the other end of the spectrum, countries like Italy choose to anchor their fans' obsession in rich historical heritage. Instead of scattering races across multiple locations, Italy concentrates an incredible historical density of Grands Prix on just a few iconic, legendary asphalt strips.
+    </p>
+
+    <div class="sub-title">Venue Count vs. Venue Loyalty</div>
+    <div class="sub-title-bar"></div>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 2</div>
+      <img src="./static/images/Seu1.png" alt="Total Races vs Number of Circuits">
+      <div class="figure-caption">
+        <strong>Figure 2.</strong> Total historical races hosted against the number of unique circuits (10 times scale). The wide gap for nations like Italy signifies deep venue loyalty—concentrating many races at a few enduring venues—whereas countries with many distinct circuits reflect a strategy of geographic expansion and rotation.
+      </div>
+    </div>
+
+    <p class="body-text">
+      The dumbbell chart compares how many distinct circuits a country has hosted against how intensively those circuits were used over time. Italy exemplifies strong venue loyalty: a high total of races concentrated across just a few physical circuits, driven largely by Monza's recurrent role. By contrast, the United States shows high circuit turnover—many distinct venues but a lower total race count—indicating frequent rotation and shorter-lived tracks.
+    </p>
+    <p class="body-text">
+      France shows a similar pattern of expansion exceeding sustained use, while faded entries for former hosts like Germany and Argentina underscore historical phases that no longer shape the modern calendar. These patterns highlight two strategic paths: concentrate races at a few enduring venues for legacy and continuity, or spread events across many venues to pursue growth and regional reach.
+    </p>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 3</div>
+      <img src="./static/images/sh2.png" alt="Turns Distribution by Circuit Type">
+      <div class="figure-caption">
+        <strong>Figure 3.</strong> Distribution and average number of turns across different circuit types. Street circuits exhibit the highest average number of turns and the widest variability, establishing them as the structurally most complex venues on the F1 calendar.
+      </div>
+    </div>
+
+    <p class="body-text">
+      Does this structural complexity directly change the pacing of a Grand Prix? To answer this, we analyzed the direct correlation between the volume of turns and the resulting <strong>Average Best Lap Times</strong>. The data reveals a clear, progressive penalty on time as the circuit layout becomes more intricate.
+    </p>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 4</div>
+      <img src="./static/images/sh1.png" alt="More Turns More Time Bar Chart">
+      <div class="figure-caption">
+        <strong>Figure 4.</strong> Comparison of average best lap times categorized by the number of turns. Building on layout differences, this clear positive correlation demonstrates that higher circuit complexity (more turns) directly causes lap times to significantly lengthen, justifying the need for distinct race strategies.
+      </div>
+    </div>
+
+    <p class="body-text">
+      As the visualization demonstrates, tracks with few corners (≤13) yield blistering fast laps averaging 70.3 seconds. However, as the turn count climbs into the "Many" category (≥18), the average lap time stretches significantly to 90.9 seconds. This physical reality forces teams into a high-stakes compromise: do they setup the car for pure straight-line velocity, or maximize downforce for cornering precision? This architectural tension is exactly why every circuit tells a completely different story.
+    </p>
+  </div>
+</div>
+
+<!-- pitstop divider -->
+<div class="pitstop-divider">
+  <div class="pit-line"></div>
+  <div class="pit-icon">Section 2 · Layout Revisions</div>
+  <div class="pit-line"></div>
+</div>
+
+<!-- ===== SECTION: Layout Revisions ===== -->
+<div class="content-section">
+  <div class="container">
+    <h2 class="section-title">Single Layout Revisions:<br>Persistence and Impact</h2>
+    <div class="section-title-bar"></div>
+
+    <p class="body-text">
+      To clearly understand how a layout change affects lap times, we gathered circuits that modified their track configuration exactly once between 2003 and 2024. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively, showing that a single layout revision does not push a circuit off the calendar.
+    </p>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 5</div>
+      <img src="./static/images/yg1.png" alt="Circuits with exactly one layout change">
+      <div class="figure-caption">
+        <strong>Figure 5.</strong> Historical race count (2003–2024) for circuits that underwent exactly one layout change. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- pitstop divider -->
+<div class="pitstop-divider">
+  <div class="pit-line"></div>
+  <div class="pit-icon">Section 3 · Evolution of Speed</div>
+  <div class="pit-line"></div>
+</div>
+
+<!-- ===== SECTION: Evolution of Speed ===== -->
+<div class="content-section">
+  <div class="container">
+    <h2 class="section-title">Evolution of Speed:<br>The Anatomy of a Layout Change</h2>
+    <div class="section-title-bar"></div>
+
+    <p class="body-text">
+      Why do track modifications create such intense anticipation among F1 fans? Racetracks are living architectures; even a minor alteration to a corner can fundamentally shift the mechanical balance and execution of speed. To explore this, we isolated iconic circuits that have undergone <strong>exactly one major layout modification</strong> in modern history, and analyzed how these structural redesigns rewrite the laws of velocity.
+    </p>
+    <p class="body-text">
+      The prime example of this structural evolution is the <strong>Melbourne (Albert Park) Grand Prix</strong>. Prior to the 2022 race, the circuit underwent its most aggressive redesign since 1996, shortening the track length from 5.303 km to 5.278 km and deleting two entire corners (reducing the turn count from 16 to 14). By transforming slow, technical corners into a sweeping high-speed complex, the structural change triggered an immediate, historic leap in speed.
+    </p>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 7</div>
+      <img src="./static/images/yg2.png" alt="Melbourne Lap Time Trend">
+      <div class="figure-caption">
+        <strong>Figure 7.</strong> Fastest lap (solid red) and winner's average lap (dashed blue) at Melbourne's Albert Park Circuit, 2018–2024. No data is available for 2020 and 2021 due to the cancellation of the Australian Grand Prix amid the COVID-19 pandemic. Note the gap between the two lines narrowing post-2022, suggesting increasingly competitive race pace. The 2024 season closed with an all-time circuit record of 1:19.813.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- pitstop divider -->
+<div class="pitstop-divider">
+  <div class="pit-line"></div>
+  <div class="pit-icon">Section 4 · Telemetry</div>
+  <div class="pit-line"></div>
+</div>
+
+<!-- ===== SECTION: Telemetry ===== -->
+<div class="content-section">
+  <div class="container">
+    <h2 class="section-title">Straights vs Corners:<br>Telemetry Highlights</h2>
+    <div class="section-title-bar"></div>
+
+    <p class="body-text">
+      The contrast between long straights and tight corners defines each circuit's character. Below are compact telemetry snapshots from Melbourne and Miami (2026) that illustrate how layouts drive different speed and braking demands.
+    </p>
+
+    <div class="telem-grid">
+      <div class="telem-card">
+        <div class="telem-label">🇦🇺 2026 Melbourne — George Russell</div>
+        <img src="./static/images/F1_2026_Australia_Russell_Final.png" alt="George Russell Telemetry Australia">
+        <div class="telem-desc">
+          Albert Park shows long full-throttle sections exceeding 300 km/h, emphasizing momentum and high-speed flow between sweeping corners.
+        </div>
+      </div>
+      <div class="telem-card">
+        <div class="telem-label">🇺🇸 2026 Miami — Kimi Antonelli</div>
+        <img src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.png" alt="Kimi Antonelli Telemetry Miami">
+        <div class="telem-desc">
+          Miami highlights heavy braking zones and tight technical corners that demand rapid deceleration and precise cornering setup.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- pitstop divider -->
+<div class="pitstop-divider">
+  <div class="pit-line"></div>
+  <div class="pit-icon">Conclusion</div>
+  <div class="pit-line"></div>
+</div>
+
+<!-- ===== CONCLUSION ===== -->
+<div class="content-section">
+  <div class="container">
+    <h2 class="section-title">Conclusion &amp; Future Work</h2>
+    <div class="section-title-bar"></div>
+
+    <p class="body-text">
+      Through this multi-layered visualization project, we demonstrated that F1 track architecture directly dictates the limits of vehicular performance. From global macro trends indicating regional distributions to fine-grained telemetry tracking throttle profiles, visual analytics serves as a powerful bridge to simplify intricate motorsports telemetry data.
+    </p>
+    <p class="body-text">
+      Moving forward, we plan to incorporate predictive machine learning frameworks (such as XGBoost or CatBoost models) to project historical lap time trajectories against newly proposed future track modifications, providing actionable analytical predictive models for track design assessments.
+    </p>
+  </div>
+</div>
+
+<!-- ===== REFERENCES ===== -->
+<div class="ref-section">
+  <div class="container">
+    <h2 class="section-title" style="color:var(--f1-white);">References and Data Sources</h2>
+    <div class="section-title-bar"></div>
+    <ul class="ref-list">
+      <li>
+        <span class="ref-num">1.</span>
+        <span>FastF1 Python library. <em>FastF1</em>. Accessed via the FastF1 project documentation.</span>
+      </li>
+      <li>
+        <span class="ref-num">2.</span>
+        <span>All circuit YAML files. f1db/f1db. GitHub. <a href="https://github.com/f1db/f1db" target="_blank">https://github.com/f1db/f1db</a></span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-flag checkered"></div>
+  <div class="footer-inner">
+    <div class="footer-logo-row">
+      <div class="f1-badge" style="transform:scale(0.75); transform-origin:center;"><span>F1</span></div>
+    </div>
+    <p>This website was created as coursework for <strong style="color:var(--f1-white);">CDS 301 / 501: Scientific Information and Data Visualization (Fall 2025)</strong> at George Mason Korea.</p>
+    <p style="margin-top:0.5rem;">
+      Licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+    </p>
+  </div>
+  <div class="footer-flag checkered"></div>
 </footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+  // ---------- Scroll progress bar ----------
+  const bar = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (window.scrollY / total * 100) + '%';
+  });
+
+  // ---------- Speed lines generator ----------
+  const linesContainer = document.getElementById('speedLines');
+  const lineCount = 18;
+  for (let i = 0; i < lineCount; i++) {
+    const line = document.createElement('div');
+    line.className = 'speed-line';
+    const top = 5 + Math.random() * 90;
+    const width = 30 + Math.random() * 50;
+    const delay = Math.random() * 2.4;
+    const dur = 1.8 + Math.random() * 1.4;
+    line.style.cssText = `
+      top: ${top}%;
+      width: ${width}%;
+      animation-delay: ${delay}s;
+      animation-duration: ${dur}s;
+    `;
+    linesContainer.appendChild(line);
+  }
+
+  // ---------- Second race car with opposite timing ----------
+  // (car 1 already in HTML; this adds ambient wheel spin feel via CSS class)
+  const car = document.getElementById('raceCar');
+  // stagger a ghost car 3s behind
+  const ghost = car.cloneNode(true);
+  ghost.style.animationDelay = '3s';
+  ghost.style.opacity = '0.35';
+  ghost.style.filter = 'drop-shadow(0 0 6px rgba(232,0,45,0.3))';
+  ghost.style.transform = 'scale(0.8)';
+  document.getElementById('trackRoad').appendChild(ghost);
+</script>
 
 </body>
 </html>
