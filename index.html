@@ -862,33 +862,410 @@
 </div>
 
 <!-- ===== SECTION: Telemetry ===== -->
-<div class="content-section">
-  <div class="container">
-    <h2 class="section-title">Straights vs Corners:<br>Telemetry Highlights</h2>
-    <div class="section-title-bar"></div>
+<div class="content-section" style="padding: 0; overflow: hidden;">
 
-    <p class="body-text">
-      The contrast between long straights and tight corners defines each circuit's character. Below are compact telemetry snapshots from Melbourne and Miami (2026) that illustrate how layouts drive different speed and braking demands.
-    </p>
-
-    <div class="telem-grid">
-      <div class="telem-card">
-        <div class="telem-label">🇦🇺 2026 Melbourne — George Russell</div>
-        <img src="./static/images/F1_2026_Australia_Russell_Final.png" alt="George Russell Telemetry Australia">
-        <div class="telem-desc">
-          Albert Park shows long full-throttle sections exceeding 300 km/h, emphasizing momentum and high-speed flow between sweeping corners.
-        </div>
-      </div>
-      <div class="telem-card">
-        <div class="telem-label">🇺🇸 2026 Miami — Kimi Antonelli</div>
-        <img src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.png" alt="Kimi Antonelli Telemetry Miami">
-        <div class="telem-desc">
-          Miami highlights heavy braking zones and tight technical corners that demand rapid deceleration and precise cornering setup.
-        </div>
-      </div>
+  <!-- Section header -->
+  <div style="padding: 4rem 1.5rem 2.5rem; text-align:center;">
+    <div class="container">
+      <h2 class="section-title">Straights vs Corners:<br>Telemetry Highlights</h2>
+      <div class="section-title-bar"></div>
+      <p class="body-text" style="max-width:680px; margin:0 auto;">
+        Each circuit tells a completely different speed story. Browse through the 2026 season's opening rounds to see how track architecture shapes every millisecond of a fastest lap.
+      </p>
     </div>
   </div>
-</div>
+
+  <!-- ===== TRACK CAROUSEL ===== -->
+  <div id="trackCarousel" style="position:relative; width:100%; background:#0F0F0F; user-select:none;">
+
+    <!-- Slide track -->
+    <div id="slideTrack" style="
+      display: flex;
+      transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
+      will-change: transform;
+    ">
+
+      <!-- SLIDE 1 · AUSTRALIA -->
+      <div class="tslide" style="min-width:100%; position:relative;">
+        <div class="tslide-bg" style="background:#0F0F0F;">
+          <!-- Header bar -->
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+            <div style="display:flex; align-items:center; gap:0.9rem;">
+              <div style="
+                background: #E8002D;
+                font-family:'Barlow Condensed',sans-serif;
+                font-weight:900; font-size:0.65rem;
+                letter-spacing:0.18em; text-transform:uppercase;
+                color:#fff; padding:3px 10px;
+                clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+              ">Round 1</div>
+              <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">3 – 6 Mar 2026</span>
+            </div>
+            <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">1 / 4</div>
+          </div>
+
+          <!-- Circuit meta -->
+          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+                <span style="font-size:1.5rem;">🇦🇺</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">Australia · Melbourne</span>
+              </div>
+              <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Albert Park Grand Prix Circuit</div>
+            </div>
+            <div style="display:flex; gap:1.5rem;">
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">82.670s</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">GEO RUSSELL</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image -->
+          <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
+            <img
+              src="./static/images/F1_2026_Australia_Russell_Final.png"
+              alt="George Russell fastest lap telemetry — Albert Park 2026"
+              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+            >
+          </div>
+
+          <!-- Insight pill -->
+          <div style="padding:0 2rem 2rem;">
+            <div style="
+              border-left:3px solid #E8002D;
+              background:#1A1A1A;
+              padding:0.8rem 1.2rem;
+              font-family:'Source Serif 4',Georgia,serif;
+              font-size:0.88rem; font-weight:300;
+              color:#bbb; line-height:1.7;
+              max-width:700px; margin:0 auto;
+            ">
+              Albert Park's redesigned layout emphasises high-speed flow. Long full-throttle sections push past <strong style="color:#F4F4F4;">300 km/h</strong>, and the deep crimson stretches on the map reveal how little time drivers spend below 200 km/h. The 2022 corner deletions are still paying off in raw speed.
+            </div>
+          </div>
+        </div>
+      </div><!-- /SLIDE 1 -->
+
+      <!-- SLIDE 2 · CHINA -->
+      <div class="tslide" style="min-width:100%; position:relative;">
+        <div class="tslide-bg" style="background:#0F0F0F;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+            <div style="display:flex; align-items:center; gap:0.9rem;">
+              <div style="
+                background:#E8002D;
+                font-family:'Barlow Condensed',sans-serif;
+                font-weight:900; font-size:0.65rem;
+                letter-spacing:0.18em; text-transform:uppercase;
+                color:#fff; padding:3px 10px;
+                clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+              ">Round 2</div>
+              <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">13 – 15 Mar 2026</span>
+            </div>
+            <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">2 / 4</div>
+          </div>
+
+          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+                <span style="font-size:1.5rem;">🇨🇳</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">China · Shanghai</span>
+              </div>
+              <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Shanghai International Circuit</div>
+            </div>
+            <div style="display:flex; gap:1.5rem;">
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">95.275s</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
+            <img
+              src="./static/images/F1_2026_China_Antonelli_Track.png"
+              alt="Andrea Kimi Antonelli fastest lap telemetry — Shanghai 2026"
+              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+            >
+          </div>
+
+          <div style="padding:0 2rem 2rem;">
+            <div style="
+              border-left:3px solid #E8002D;
+              background:#1A1A1A;
+              padding:0.8rem 1.2rem;
+              font-family:'Source Serif 4',Georgia,serif;
+              font-size:0.88rem; font-weight:300;
+              color:#bbb; line-height:1.7;
+              max-width:700px; margin:0 auto;
+            ">
+              Shanghai's iconic "snake" sector sequence forces continuous direction changes, creating the pale yellow corridors on the map. The long back straight DRS zone offers brief respite before Turns 13–16 demand maximum downforce — a true car-setup paradox.
+            </div>
+          </div>
+        </div>
+      </div><!-- /SLIDE 2 -->
+
+      <!-- SLIDE 3 · JAPAN -->
+      <div class="tslide" style="min-width:100%; position:relative;">
+        <div class="tslide-bg" style="background:#0F0F0F;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+            <div style="display:flex; align-items:center; gap:0.9rem;">
+              <div style="
+                background:#E8002D;
+                font-family:'Barlow Condensed',sans-serif;
+                font-weight:900; font-size:0.65rem;
+                letter-spacing:0.18em; text-transform:uppercase;
+                color:#fff; padding:3px 10px;
+                clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+              ">Round 3</div>
+              <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">27 – 29 Mar 2026</span>
+            </div>
+            <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">3 / 4</div>
+          </div>
+
+          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+                <span style="font-size:1.5rem;">🇯🇵</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">Japan · Suzuka</span>
+              </div>
+              <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Suzuka Circuit</div>
+            </div>
+            <div style="display:flex; gap:1.5rem;">
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">92.432s</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
+            <img
+              src="./static/images/F1_2026_Japan_Antonelli_Track.png"
+              alt="Andrea Kimi Antonelli fastest lap telemetry — Suzuka 2026"
+              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+            >
+          </div>
+
+          <div style="padding:0 2rem 2rem;">
+            <div style="
+              border-left:3px solid #E8002D;
+              background:#1A1A1A;
+              padding:0.8rem 1.2rem;
+              font-family:'Source Serif 4',Georgia,serif;
+              font-size:0.88rem; font-weight:300;
+              color:#bbb; line-height:1.7;
+              max-width:700px; margin:0 auto;
+            ">
+              Suzuka's figure-of-eight layout is unique on the calendar. The legendary 130R corner — taken flat in qualifying at over <strong style="color:#F4F4F4;">290 km/h</strong> — appears as a deep crimson arc. The Esses complex keeps speed relatively constant but demands extreme precision, shown in graduated amber tones.
+            </div>
+          </div>
+        </div>
+      </div><!-- /SLIDE 3 -->
+
+      <!-- SLIDE 4 · MIAMI -->
+      <div class="tslide" style="min-width:100%; position:relative;">
+        <div class="tslide-bg" style="background:#0F0F0F;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+            <div style="display:flex; align-items:center; gap:0.9rem;">
+              <div style="
+                background:#E8002D;
+                font-family:'Barlow Condensed',sans-serif;
+                font-weight:900; font-size:0.65rem;
+                letter-spacing:0.18em; text-transform:uppercase;
+                color:#fff; padding:3px 10px;
+                clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+              ">Round 4</div>
+              <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">2 – 4 May 2026</span>
+            </div>
+            <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">4 / 4</div>
+          </div>
+
+          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+            <div>
+              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+                <span style="font-size:1.5rem;">🇺🇸</span>
+                <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">USA · Miami Gardens</span>
+              </div>
+              <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Miami International Autodrome</div>
+            </div>
+            <div style="display:flex; gap:1.5rem;">
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">91.968s</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
+            <img
+              src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.png"
+              alt="Andrea Kimi Antonelli fastest lap telemetry — Miami 2026"
+              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+            >
+          </div>
+
+          <div style="padding:0 2rem 2rem;">
+            <div style="
+              border-left:3px solid #E8002D;
+              background:#1A1A1A;
+              padding:0.8rem 1.2rem;
+              font-family:'Source Serif 4',Georgia,serif;
+              font-size:0.88rem; font-weight:300;
+              color:#bbb; line-height:1.7;
+              max-width:700px; margin:0 auto;
+            ">
+              Miami's wide, purpose-built layout has two long straights that produce the darkest crimson sections of the map, yet the tight infield chicane sequence forces hard braking — the sharp colour transitions reveal just how aggressively energy is scrubbed off within metres.
+            </div>
+          </div>
+        </div>
+      </div><!-- /SLIDE 4 -->
+
+    </div><!-- /slideTrack -->
+
+    <!-- ===== NAVIGATION CONTROLS ===== -->
+
+    <!-- Prev / Next arrows -->
+    <button id="prevBtn" onclick="carouselMove(-1)" aria-label="Previous circuit" style="
+      position:absolute; top:50%; left:1rem;
+      transform:translateY(-50%);
+      background:rgba(15,15,15,0.85);
+      border:1px solid #333;
+      color:#F4F4F4;
+      width:44px; height:44px;
+      border-radius:50%;
+      font-size:1.2rem;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:background 0.2s, border-color 0.2s;
+      z-index:10;
+      font-family:'Barlow Condensed',sans-serif;
+    ">&#8592;</button>
+
+    <button id="nextBtn" onclick="carouselMove(1)" aria-label="Next circuit" style="
+      position:absolute; top:50%; right:1rem;
+      transform:translateY(-50%);
+      background:rgba(15,15,15,0.85);
+      border:1px solid #333;
+      color:#F4F4F4;
+      width:44px; height:44px;
+      border-radius:50%;
+      font-size:1.2rem;
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:background 0.2s, border-color 0.2s;
+      z-index:10;
+      font-family:'Barlow Condensed',sans-serif;
+    ">&#8594;</button>
+
+    <!-- Dot indicators -->
+    <div id="dotRow" style="
+      display:flex; justify-content:center; align-items:center;
+      gap:8px;
+      padding:1.2rem 0 1.6rem;
+      background:#0F0F0F;
+    ">
+      <button class="cdot active" onclick="carouselGoto(0)" aria-label="Go to slide 1" style="width:28px;height:4px;border:none;border-radius:2px;background:#E8002D;cursor:pointer;transition:all 0.3s;padding:0;"></button>
+      <button class="cdot" onclick="carouselGoto(1)" aria-label="Go to slide 2" style="width:10px;height:4px;border:none;border-radius:2px;background:#444;cursor:pointer;transition:all 0.3s;padding:0;"></button>
+      <button class="cdot" onclick="carouselGoto(2)" aria-label="Go to slide 3" style="width:10px;height:4px;border:none;border-radius:2px;background:#444;cursor:pointer;transition:all 0.3s;padding:0;"></button>
+      <button class="cdot" onclick="carouselGoto(3)" aria-label="Go to slide 4" style="width:10px;height:4px;border:none;border-radius:2px;background:#444;cursor:pointer;transition:all 0.3s;padding:0;"></button>
+    </div>
+
+    <!-- Round label strip -->
+    <div style="
+      display:flex; border-top:1px solid #1A1A1A;
+      background:#0A0A0A;
+    ">
+      <button onclick="carouselGoto(0)" id="tab0" style="flex:1; padding:0.9rem 0.5rem; background:transparent; border:none; border-right:1px solid #1A1A1A; cursor:pointer; transition:background 0.2s;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#E8002D; line-height:1;">AUS</div>
+        <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px;">Melbourne</div>
+      </button>
+      <button onclick="carouselGoto(1)" id="tab1" style="flex:1; padding:0.9rem 0.5rem; background:transparent; border:none; border-right:1px solid #1A1A1A; cursor:pointer; transition:background 0.2s;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#666; line-height:1;">CHN</div>
+        <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px;">Shanghai</div>
+      </button>
+      <button onclick="carouselGoto(2)" id="tab2" style="flex:1; padding:0.9rem 0.5rem; background:transparent; border:none; border-right:1px solid #1A1A1A; cursor:pointer; transition:background 0.2s;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#666; line-height:1;">JPN</div>
+        <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px;">Suzuka</div>
+      </button>
+      <button onclick="carouselGoto(3)" id="tab3" style="flex:1; padding:0.9rem 0.5rem; background:transparent; border:none; cursor:pointer; transition:background 0.2s;">
+        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#666; line-height:1;">MIA</div>
+        <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px;">Miami</div>
+      </button>
+    </div>
+
+  </div><!-- /trackCarousel -->
+</div><!-- /content-section -->
+
+<script>
+(function(){
+  var current = 0;
+  var total = 4;
+  var track = document.getElementById('slideTrack');
+  var dots = document.querySelectorAll('.cdot');
+  var tabs = [
+    document.getElementById('tab0'),
+    document.getElementById('tab1'),
+    document.getElementById('tab2'),
+    document.getElementById('tab3')
+  ];
+  var tabColors = ['#E8002D','#666','#666','#666'];
+
+  function update(n){
+    current = (n + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+
+    dots.forEach(function(d,i){
+      if(i === current){
+        d.style.width = '28px';
+        d.style.background = '#E8002D';
+      } else {
+        d.style.width = '10px';
+        d.style.background = '#444';
+      }
+    });
+
+    tabs.forEach(function(t,i){
+      var label = t.querySelector('div');
+      if(i === current){
+        t.style.background = '#1A1A1A';
+        label.style.color = '#E8002D';
+      } else {
+        t.style.background = 'transparent';
+        label.style.color = '#666';
+      }
+    });
+  }
+
+  window.carouselMove = function(dir){ update(current + dir); };
+  window.carouselGoto = function(n){ update(n); };
+
+  /* swipe support */
+  var startX = 0;
+  var el = document.getElementById('trackCarousel');
+  el.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  el.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - startX;
+    if(Math.abs(dx) > 40){ update(current + (dx < 0 ? 1 : -1)); }
+  }, {passive:true});
+})();
+</script>
 
 <!-- pitstop divider -->
 <div class="pitstop-divider">
