@@ -69,7 +69,8 @@
     }
     .ticker-inner {
       display: inline-block;
-      animation: ticker 28s linear infinite;
+      /* slowed from 28s to 55s for readability */
+      animation: ticker 55s linear infinite;
       padding-left: 100%;
     }
     .ticker-inner span { margin: 0 3rem; }
@@ -314,11 +315,11 @@
       margin: 0 auto;
     }
 
-    /* Section heading with red underline bar */
+    /* Section heading with red underline bar — increased font sizes */
     .section-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-size: clamp(2rem, 4.5vw, 3rem);
       text-transform: uppercase;
       letter-spacing: 0.03em;
       color: var(--f1-dark);
@@ -359,14 +360,16 @@
       line-height: 1.85;
       position: relative;
       z-index: 1;
+      text-align: justify;
     }
 
-    /* Body text */
+    /* Body text — justified */
     .body-text {
-      font-size: 0.95rem;
-      line-height: 1.8;
+      font-size: 1rem;
+      line-height: 1.85;
       color: var(--text-mid);
       margin-bottom: 1.2rem;
+      text-align: justify;
     }
     .body-text strong { color: var(--text-dark); font-weight: 600; }
 
@@ -384,10 +387,10 @@
     .figure-caption {
       margin-top: 0.75rem;
       font-family: 'Rajdhani', sans-serif;
-      font-size: 0.85rem;
-      color: #777;
-      line-height: 1.5;
-      text-align: center;
+      font-size: 0.92rem;
+      color: #666;
+      line-height: 1.6;
+      text-align: justify;
     }
     .figure-caption strong {
       color: var(--f1-red);
@@ -398,7 +401,7 @@
       background: var(--f1-red);
       color: #fff;
       font-family: 'Rajdhani', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.15em;
       padding: 2px 8px;
@@ -445,7 +448,7 @@
     .sub-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
-      font-size: 1.6rem;
+      font-size: 1.85rem;
       text-transform: uppercase;
       letter-spacing: 0.03em;
       color: var(--f1-dark);
@@ -456,6 +459,25 @@
       width: 40px; height: 3px;
       background: var(--f1-red);
       margin: 0.3rem auto 1.5rem;
+    }
+
+    /* Definition boxes for Figure 2 */
+    .def-box {
+      background: #F7F5F2;
+      border-left: 3px solid var(--f1-red);
+      padding: 1rem 1.4rem;
+      margin: 0 0 1.5rem;
+      border-radius: 0 2px 2px 0;
+    }
+    .def-box p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-mid);
+      text-align: justify;
+    }
+    .def-box strong {
+      color: var(--text-dark);
+      font-weight: 700;
     }
 
     /* Telemetry side-by-side */
@@ -505,7 +527,7 @@
       margin: 0 auto;
     }
     .ref-list li {
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       line-height: 1.7;
       padding: 0.7rem 0;
       border-bottom: 1px solid #2A2A2A;
@@ -574,7 +596,7 @@
     .pit-line { flex: 1; height: 1px; background: #333; }
     .pit-icon {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 0.25em;
       color: var(--f1-red);
@@ -735,7 +757,8 @@
     <div class="section-title-bar"></div>
 
     <p class="body-text">
-      The isotype chart below maps how countries differ in the types of F1 venues they have hosted — permanent race circuits, temporary street circuits, and road circuits. Each hexagon represents one unique circuit, with the count shown immediately beside the country name for quick reference. Countries are ranked from top to bottom by the number of distinct circuits hosted, making cross-country comparisons immediate.    </p>
+      The isotype chart below maps how countries differ in the types of F1 venues they have hosted — permanent race circuits, temporary street circuits, and road circuits. Each hexagon represents one unique circuit, with the count shown immediately after the country name for quick reference. Countries are ranked from top to bottom by the number of distinct circuits hosted, making cross-country comparisons immediate.
+    </p>
     <p class="body-text">
       The United States leads with 12 distinct circuits — nearly double France's 7 in second place — reflecting a deliberate strategy of bringing the sport to new regions rather than anchoring it to a single venue. Street circuits, which demand an entirely different engineering challenge from a permanent track, are concentrated almost exclusively in the U.S. and a handful of European cities. Traditional motorsport nations such as Italy and the United Kingdom, by contrast, host only four unique venues each yet maintain a dominant presence on the F1 calendar, signaling that heritage and continuity define their relationship with the sport. Filled hexagons indicate circuits currently active on the F1 calendar; outline-only hexagons represent retired venues, making it immediately visible how much of each country's hosting history belongs to the modern era versus the sport's past.
     </p>
@@ -744,7 +767,7 @@
       <div class="fig-label">Figure 1</div>
       <img src="./static/images/Seou0.png" alt="F1 Circuits Hosted per Country">
       <div class="figure-caption">
-        <strong>Figure 1.</strong> Unique F1 circuits hosted by country, ranked by circuit count. Each hexagon represents one circuit: colour encodes circuit type (red = race circuit, blue = street circuit, gold = road circuit), and fill encodes status — solid hexagons are currently active on the F1 calendar, while outline-only hexagons are retired venues. The United States leads with 12 circuits, nearly double France (7).
+        <strong>Figure 1.</strong> Unique F1 circuits hosted by country, ranked by circuit count. The count appears immediately after each country name for at-a-glance comparison. Each hexagon represents one circuit: colour encodes circuit type (red = race circuit, blue = street circuit, gold = road circuit), and fill encodes status — solid hexagons are currently active on the F1 calendar, while outline-only hexagons are retired venues. The United States leads with 12 circuits, nearly double France (7).
       </div>
     </div>
 
@@ -754,6 +777,14 @@
 
     <div class="sub-title">Venue Count vs. Venue Loyalty</div>
     <div class="sub-title-bar"></div>
+
+    <!-- Definition boxes for Figure 2 -->
+    <div class="def-box">
+      <p><strong>Venue Loyalty</strong> refers to the concentration of races at a small number of circuits. A country with high venue loyalty has hosted many Grand Prix events at the same locations over time, reflecting deep historical and institutional ties to those circuits.</p>
+    </div>
+    <div class="def-box">
+      <p><strong>Venue Count</strong> refers to the total number of distinct circuits a country has ever hosted a Formula 1 Grand Prix at, regardless of how frequently each venue appeared on the calendar.</p>
+    </div>
 
     <div class="figure-wrap">
       <div class="fig-label">Figure 2</div>
@@ -767,14 +798,14 @@
       The dumbbell chart makes venue loyalty legible at a glance. Italy sits at one extreme: 109 total races across only 4 circuits — the widest gap on the chart — driven above all by Monza's near-unbroken presence on the calendar since 1950. Monaco reinforces this pattern with 71 Grands Prix hosted by a single street circuit, more than most multi-venue countries manage in total.
     </p>
     <p class="body-text">
-      The United States occupies the opposite pole. Twelve unique circuits have hosted just 82 races combined, meaning the average American venue saw fewer than seven events before being replaced or retired. The blue dot (circuits ×10 = 120) reaching far beyond the red dot (82 races) is the visual signature of this rotation-first philosophy.France and Germany show similar patterns — high circuit counts relative to sustained use — and both appear in muted tones because neither currently holds a place on the F1 calendar. These faded entries serve as a quiet reminder that a long hosting history is no guarantee of permanence. Taken together, the two extremes frame the central tension in F1's global story: **legacy and concentration on one side, geographic reach and reinvention on the other**.
+      The United States occupies the opposite pole. Twelve unique circuits have hosted just 82 races combined, meaning the average American venue saw fewer than seven events before being replaced or retired. The blue dot (circuits ×10 = 120) reaching far beyond the red dot (82 races) is the visual signature of this rotation-first philosophy. France and Germany show similar patterns — high circuit counts relative to sustained use — and both appear in muted tones because neither currently holds a place on the F1 calendar. These faded entries serve as a quiet reminder that a long hosting history is no guarantee of permanence. Taken together, the two extremes frame the central tension in F1's global story: <strong>legacy and concentration on one side, geographic reach and reinvention on the other</strong>.
     </p>
 
     <div class="figure-wrap">
       <div class="fig-label">Figure 3</div>
-      <img src="./static/images/sh2.png" alt="Turns Distribution by Circuit Type">
+      <img src="./static/images/shn1.png" alt="Turns Distribution by Circuit Type">
       <div class="figure-caption">
-        <strong>Figure 3.</strong> Distribution and average number of turns across different circuit types. Street circuits exhibit the highest average number of turns and the widest variability, establishing them as the structurally most complex venues on the F1 calendar.
+        <strong>Figure 3.</strong> Distribution of the number of turns across different circuit types, shown as a scatter/swarm plot with individual data points to convey the full spread of the data. Street circuits exhibit both the highest density of intricate layouts and the widest overall range of turn counts, confirming that temporary urban venues are structurally the most varied category on the F1 calendar.
       </div>
     </div>
 
@@ -784,9 +815,9 @@
 
     <div class="figure-wrap">
       <div class="fig-label">Figure 4</div>
-      <img src="./static/images/sh1.png" alt="More Turns More Time Bar Chart">
+      <img src="./static/images/shn2.png" alt="More Turns More Time Scatter Plot">
       <div class="figure-caption">
-        <strong>Figure 4.</strong> Comparison of average best lap times categorized by the number of turns. Building on layout differences, this clear positive correlation demonstrates that higher circuit complexity (more turns) directly causes lap times to significantly lengthen, justifying the need for distinct race strategies.
+        <strong>Figure 4.</strong> Scatter plot of F1 circuit best lap times against the number of turns for grand prix circuits active since 2000. Each point represents a single circuit. The dashed line represents the overall linear trend, illustrating a strong positive correlation where an increase in turn count consistently extends lap times due to accumulated braking and cornering phases. This direct representation highlights how track layout inherently shapes the structural baseline for lap times and race strategy.
       </div>
     </div>
 
@@ -810,14 +841,14 @@
     <div class="section-title-bar"></div>
 
     <p class="body-text">
-      To clearly understand how a layout change affects lap times, we gathered circuits that modified their track configuration exactly once between 2003 and 2024. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively, showing that a single layout revision does not push a circuit off the calendar.
+      To clearly understand how a layout change affects lap times, we gathered circuits that modified their track configuration exactly once between 2003 and 2024. In this analysis, a <strong>layout revision</strong> is strictly defined as a physical alteration to the track geometry — such as adding a new chicane, re-profiling a corner, or changing the total track length — rather than routine resurfacing or changes to run-off areas that do not affect the racing line. Only circuits with a single such intervention are included, allowing before-and-after lap time comparisons that are unambiguous and attributable to one structural change. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively, demonstrating that a single layout revision does not push a circuit off the calendar — in fact, both remain fixtures of the modern F1 season.
     </p>
 
     <div class="figure-wrap">
       <div class="fig-label">Figure 5</div>
       <img src="./static/images/yg1.png" alt="Circuits with exactly one layout change">
       <div class="figure-caption">
-        <strong>Figure 5.</strong> Historical race count (2003–2024) for circuits that underwent exactly one layout change. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively.
+        <strong>Figure 5.</strong> Historical race count (2003–2024) for circuits that underwent exactly one layout change. A layout revision is defined as a physical alteration to track geometry — including new chicanes, re-profiled corners, or changes in track length — and excludes resurfacing. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively.
       </div>
     </div>
   </div>
@@ -837,19 +868,47 @@
     <div class="section-title-bar"></div>
 
     <p class="body-text">
-      Why do track modifications create such intense anticipation among F1 fans? Racetracks are living architectures; even a minor alteration to a corner can fundamentally shift the mechanical balance and execution of speed. To explore this, we isolated iconic circuits that have undergone <strong>exactly one major layout modification</strong> in modern history, and analyzed how these structural redesigns rewrite the laws of velocity.
+      Why do track modifications create such intense anticipation among F1 fans? Racetracks are living architectures; even a minor alteration to a corner can fundamentally shift the mechanical balance and execution of speed. To explore this, we isolated iconic circuits that have undergone <strong>exactly one major layout modification</strong> in modern history, and analyzed how these structural redesigns rewrite the laws of velocity. Two circuits provide especially instructive case studies: Melbourne's Albert Park and Abu Dhabi's Yas Marina.
     </p>
+
+    <div class="sub-title">Melbourne — Albert Park</div>
+    <div class="sub-title-bar"></div>
+
     <p class="body-text">
-      The prime example of this structural evolution is the <strong>Melbourne (Albert Park) Grand Prix</strong>. Prior to the 2022 race, the circuit underwent its most aggressive redesign since 1996, shortening the track length from 5.303 km to 5.278 km and deleting two entire corners (reducing the turn count from 16 to 14). By transforming slow, technical corners into a sweeping high-speed complex, the structural change triggered an immediate, historic leap in speed.
+      The prime example of this structural evolution is the <strong>Melbourne (Albert Park) Grand Prix Circuit</strong>. Prior to the 2022 race, the circuit underwent its most aggressive redesign since 1996, shortening the track length from 5.303 km to 5.278 km and deleting two entire corners (reducing the turn count from 16 to 14). By transforming slow, technical corners into a sweeping high-speed complex, the structural change triggered an immediate, historic leap in speed.
     </p>
 
     <div class="figure-wrap">
-      <div class="fig-label">Figure 7</div>
-      <img src="./static/images/yg2.png" alt="Melbourne Lap Time Trend">
+      <div class="fig-label">Figure 6</div>
+      <img src="./static/images/ygn1.png" alt="Melbourne Circuit Layout Change Overview">
       <div class="figure-caption">
-        <strong>Figure 7.</strong> Fastest lap (solid red) and winner's average lap (dashed blue) at Melbourne's Albert Park Circuit, 2018–2024. No data is available for 2020 and 2021 due to the cancellation of the Australian Grand Prix amid the COVID-19 pandemic. Note the gap between the two lines narrowing post-2022, suggesting increasingly competitive race pace. The 2024 season closed with an all-time circuit record of 1:19.813.
+        <strong>Figure 6.</strong> Overview of the 2022 layout revision at Albert Park, Melbourne. The redesign removed two corners and shortened the circuit from 5.303 km to 5.278 km, converting a slow technical section into a high-speed flowing complex that fundamentally altered car setup requirements and race strategy.
       </div>
     </div>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 7</div>
+      <img src="./static/images/ygn2.png" alt="Melbourne Lap Time Trend">
+      <div class="figure-caption">
+        <strong>Figure 7.</strong> Fastest lap (solid red) and winner's average lap (dashed blue) at Melbourne's Albert Park Circuit, 2018–2024. No data is available for 2020 and 2021 due to the cancellation of the Australian Grand Prix amid the COVID-19 pandemic. The gap between the two lines narrows post-2022, suggesting increasingly competitive race pace. The 2024 season closed with an all-time circuit record of 1:19.813.
+      </div>
+    </div>
+
+    <div class="sub-title">Abu Dhabi — Yas Marina</div>
+    <div class="sub-title-bar"></div>
+
+    <p class="body-text">
+      The second case study is the <strong>Abu Dhabi (Yas Marina) Grand Prix Circuit</strong>. Before the 2021 race, the circuit underwent its most dramatic transformation since its debut in 2009, shortening the track length from 5.554 km to 5.281 km and eliminating five entire corners (reducing the turn count from 21 to 16). The redesign fundamentally altered the circuit's character, shifting it from a technically demanding, low-speed puzzle into a higher-speed, momentum-driven layout. The structural change triggered an immediate and measurable leap in lap times, rewriting the pace benchmarks of what had long been Formula 1's definitive season finale.
+    </p>
+
+    <div class="figure-wrap">
+      <div class="fig-label">Figure 8</div>
+      <img src="./static/images/ygn2.png" alt="Abu Dhabi Lap Time Trend">
+      <div class="figure-caption">
+        <strong>Figure 8.</strong> Fastest lap and winner's average lap at Abu Dhabi's Yas Marina Circuit across the pre- and post-revision eras. The 2021 layout change — removing five corners and 273 metres of track — produced a sharp downward step in lap times, reflecting the circuit's transformation from a processional low-speed venue into one of the fastest permanent circuits on the calendar.
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -868,7 +927,7 @@
     <div class="container">
       <h2 class="section-title">Straights vs Corners:<br>Telemetry Highlights</h2>
       <div class="section-title-bar"></div>
-      <p class="body-text" style="max-width:680px; margin:0 auto;">
+      <p class="body-text" style="max-width:680px; margin:0 auto; text-align:justify;">
         Each circuit tells a completely different speed story. Browse through the 2026 season's opening rounds to see how track architecture shapes every millisecond of a fastest lap.
       </p>
     </div>
@@ -943,6 +1002,7 @@
               font-size:0.88rem; font-weight:300;
               color:#bbb; line-height:1.7;
               max-width:700px; margin:0 auto;
+              text-align:justify;
             ">
               Albert Park's redesigned layout emphasises high-speed flow. Long full-throttle sections push past <strong style="color:#F4F4F4;">300 km/h</strong>, and the deep crimson stretches on the map reveal how little time drivers spend below 200 km/h. The 2022 corner deletions are still paying off in raw speed.
             </div>
@@ -1005,6 +1065,7 @@
               font-size:0.88rem; font-weight:300;
               color:#bbb; line-height:1.7;
               max-width:700px; margin:0 auto;
+              text-align:justify;
             ">
               Shanghai's iconic "snake" sector sequence forces continuous direction changes, creating the pale yellow corridors on the map. The long back straight DRS zone offers brief respite before Turns 13–16 demand maximum downforce — a true car-setup paradox.
             </div>
@@ -1067,6 +1128,7 @@
               font-size:0.88rem; font-weight:300;
               color:#bbb; line-height:1.7;
               max-width:700px; margin:0 auto;
+              text-align:justify;
             ">
               Suzuka's figure-of-eight layout is unique on the calendar. The legendary 130R corner — taken flat in qualifying at over <strong style="color:#F4F4F4;">290 km/h</strong> — appears as a deep crimson arc. The Esses complex keeps speed relatively constant but demands extreme precision, shown in graduated amber tones.
             </div>
@@ -1129,6 +1191,7 @@
               font-size:0.88rem; font-weight:300;
               color:#bbb; line-height:1.7;
               max-width:700px; margin:0 auto;
+              text-align:justify;
             ">
               Miami's wide, purpose-built layout has two long straights that produce the darkest crimson sections of the map, yet the tight infield chicane sequence forces hard braking — the sharp colour transitions reveal just how aggressively energy is scrubbed off within metres.
             </div>
@@ -1224,7 +1287,6 @@
     document.getElementById('tab2'),
     document.getElementById('tab3')
   ];
-  var tabColors = ['#E8002D','#666','#666','#666'];
 
   function update(n){
     current = (n + total) % total;
@@ -1277,14 +1339,20 @@
 <!-- ===== CONCLUSION ===== -->
 <div class="content-section">
   <div class="container">
-    <h2 class="section-title">Conclusion &amp; Future Work</h2>
+    <h2 class="section-title">Conclusion</h2>
     <div class="section-title-bar"></div>
 
     <p class="body-text">
-      Our project shows that F1 tracks are not just places where cars race. The track design itself is what creates the strategy, speed, and drama of every Grand Prix. By turning complex racing data into clear visuals, we explain exactly why these circuits fascinate millions of fans worldwide.
+      This project demonstrates that the circuit itself is the central protagonist of every Formula 1 Grand Prix — not merely the stage on which the race unfolds. Through four interconnected layers of analysis, we have shown how racetrack architecture shapes every dimension of the sport that fans find compelling. The global distribution of hosting nations reveals two fundamentally different philosophies: the heritage concentration of countries like Italy and Monaco, where decades of racing history are embedded in a handful of circuits, and the variety-driven approach of the United States, where 12 different venues have hosted events in a constant search for new audiences and contexts.
     </p>
     <p class="body-text">
-      Moving forward, we want to build an interactive dashboard for the public. This will allow everyday fans and newcomers to easily see how track shapes and layout changes affect the race, making complicated motorsports data easy for everyone to understand.
+      The structural analysis of turn count and lap time confirms that circuit geometry is not incidental — it is deterministic. A circuit with few, fast corners produces lap times nearly 30 seconds quicker than a complex, twisting layout, forcing teams to make fundamentally different engineering choices at every round. This structural diversity is precisely what prevents F1 from becoming repetitive: no two circuits demand the same car setup, and no single team philosophy dominates universally.
+    </p>
+    <p class="body-text">
+      The case studies of Melbourne and Abu Dhabi illustrate how a single, carefully targeted layout revision can permanently reset a circuit's competitive identity. Albert Park's 2022 redesign — removing just two corners — produced immediate lap time records and transformed the Australian Grand Prix from a processional opener into one of the most-anticipated events of the season. Yas Marina's 2021 overhaul achieved a comparable transformation, converting the season finale from a strategic procession into a genuine high-speed spectacle. Both examples confirm that circuit evolution is an active and consequential tool in Formula 1, not merely a matter of maintenance.
+    </p>
+    <p class="body-text">
+      Finally, the high-frequency telemetry maps of the 2026 season's opening rounds make the relationship between track architecture and speed dynamics viscerally visible. The sharp colour gradients — deep crimson on long straights, amber and yellow through tight sequences — translate engineering data into an intuitive, universally readable picture of what it means to drive a Formula 1 car at the limit. Taken together, these four analytical perspectives converge on a single conclusion: the racetrack is not where F1 drama happens — it is the reason F1 drama is possible.
     </p>
   </div>
 </div>
@@ -1344,24 +1412,4 @@
     const dur = 1.8 + Math.random() * 1.4;
     line.style.cssText = `
       top: ${top}%;
-      width: ${width}%;
-      animation-delay: ${delay}s;
-      animation-duration: ${dur}s;
-    `;
-    linesContainer.appendChild(line);
-  }
-
-  // ---------- Second race car with opposite timing ----------
-  // (car 1 already in HTML; this adds ambient wheel spin feel via CSS class)
-  const car = document.getElementById('raceCar');
-  // stagger a ghost car 3s behind
-  const ghost = car.cloneNode(true);
-  ghost.style.animationDelay = '3s';
-  ghost.style.opacity = '0.35';
-  ghost.style.filter = 'drop-shadow(0 0 6px rgba(232,0,45,0.3))';
-  ghost.style.transform = 'scale(0.8)';
-  document.getElementById('trackRoad').appendChild(ghost);
-</script>
-
-</body>
-</html>
+      width: $
