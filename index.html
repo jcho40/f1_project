@@ -912,9 +912,10 @@
 </div>
 
 <!-- ===== SECTION: Telemetry ===== -->
+
+
 <div class="content-section" style="padding: 0; overflow: hidden;">
 
-  <!-- Section header -->
   <div style="padding: 4rem 1.5rem 2.5rem; text-align:center;">
     <div class="container">
       <h2 class="section-title">Straights vs Corners:<br>Telemetry Highlights</h2>
@@ -925,21 +926,17 @@
     </div>
   </div>
 
-  <!-- ===== TRACK CAROUSEL ===== -->
-  <div id="trackCarousel" style="position:relative; width:100%; background:#0F0F0F; user-select:none;">
+  <div id="trackCarousel" style="position:relative; max-width:900px; margin:0 auto; background:#0F0F0F; user-select:none; border-radius:4px; overflow:hidden;">
 
-    <!-- Slide track -->
     <div id="slideTrack" style="
       display: flex;
       transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
       will-change: transform;
     ">
 
-      <!-- SLIDE 1 · AUSTRALIA -->
       <div class="tslide" style="min-width:100%; position:relative;">
         <div class="tslide-bg" style="background:#0F0F0F;">
-          <!-- Header bar -->
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
               <div style="
                 background: #E8002D;
@@ -954,38 +951,36 @@
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">1 / 4</div>
           </div>
 
-          <!-- Circuit meta -->
-          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
             <div>
-              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
                 <span style="font-size:1.5rem;">🇦🇺</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">Australia · Melbourne</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Albert Park Grand Prix Circuit</div>
             </div>
-            <div style="display:flex; gap:1.5rem;">
-              <div style="text-align:right;">
+            
+            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">82.670s</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div style="text-align:right;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">GEO RUSSELL</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
 
-          <!-- Image -->
           <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
             <img
               src="./static/images/F1_2026_Australia_Russell_Final.png"
               alt="George Russell fastest lap telemetry — Albert Park 2026"
-              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+              style="max-width:100%; width:100%; height:auto; display:block;"
             >
           </div>
 
-          <!-- Insight pill -->
-          <div style="padding:0 2rem 2rem;">
+          <div style="padding:0 2rem 2.5rem;">
             <div style="
               border-left:3px solid #E8002D;
               background:#1A1A1A;
@@ -1000,12 +995,9 @@
             </div>
           </div>
         </div>
-      </div><!-- /SLIDE 1 -->
-
-      <!-- SLIDE 2 · CHINA -->
-      <div class="tslide" style="min-width:100%; position:relative;">
+      </div><div class="tslide" style="min-width:100%; position:relative;">
         <div class="tslide-bg" style="background:#0F0F0F;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
               <div style="
                 background:#E8002D;
@@ -1020,22 +1012,23 @@
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">2 / 4</div>
           </div>
 
-          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
             <div>
-              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
                 <span style="font-size:1.5rem;">🇨🇳</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">China · Shanghai</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Shanghai International Circuit</div>
             </div>
-            <div style="display:flex; gap:1.5rem;">
-              <div style="text-align:right;">
+            
+            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">95.275s</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div style="text-align:right;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
@@ -1044,11 +1037,11 @@
             <img
               src="./static/images/F1_2026_China_Antonelli_Track.png"
               alt="Andrea Kimi Antonelli fastest lap telemetry — Shanghai 2026"
-              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+              style="max-width:100%; width:100%; height:auto; display:block;"
             >
           </div>
 
-          <div style="padding:0 2rem 2rem;">
+          <div style="padding:0 2rem 2.5rem;">
             <div style="
               border-left:3px solid #E8002D;
               background:#1A1A1A;
@@ -1063,12 +1056,9 @@
             </div>
           </div>
         </div>
-      </div><!-- /SLIDE 2 -->
-
-      <!-- SLIDE 3 · JAPAN -->
-      <div class="tslide" style="min-width:100%; position:relative;">
+      </div><div class="tslide" style="min-width:100%; position:relative;">
         <div class="tslide-bg" style="background:#0F0F0F;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
               <div style="
                 background:#E8002D;
@@ -1083,22 +1073,23 @@
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">3 / 4</div>
           </div>
 
-          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
             <div>
-              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
                 <span style="font-size:1.5rem;">🇯🇵</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">Japan · Suzuka</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Suzuka Circuit</div>
             </div>
-            <div style="display:flex; gap:1.5rem;">
-              <div style="text-align:right;">
+            
+            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">92.432s</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div style="text-align:right;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
@@ -1107,11 +1098,11 @@
             <img
               src="./static/images/F1_2026_Japan_Antonelli_Track.png"
               alt="Andrea Kimi Antonelli fastest lap telemetry — Suzuka 2026"
-              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+              style="max-width:100%; width:100%; height:auto; display:block;"
             >
           </div>
 
-          <div style="padding:0 2rem 2rem;">
+          <div style="padding:0 2rem 2.5rem;">
             <div style="
               border-left:3px solid #E8002D;
               background:#1A1A1A;
@@ -1126,12 +1117,9 @@
             </div>
           </div>
         </div>
-      </div><!-- /SLIDE 3 -->
-
-      <!-- SLIDE 4 · MIAMI -->
-      <div class="tslide" style="min-width:100%; position:relative;">
+      </div><div class="tslide" style="min-width:100%; position:relative;">
         <div class="tslide-bg" style="background:#0F0F0F;">
-          <div style="display:flex; align-items:center; justify-content:space-between; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
               <div style="
                 background:#E8002D;
@@ -1146,22 +1134,23 @@
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">4 / 4</div>
           </div>
 
-          <div style="padding:1.2rem 2rem 0; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
             <div>
-              <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.3rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
                 <span style="font-size:1.5rem;">🇺🇸</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">USA · Miami Gardens</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Miami International Autodrome</div>
             </div>
-            <div style="display:flex; gap:1.5rem;">
-              <div style="text-align:right;">
+            
+            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">91.968s</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Fastest Lap</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div style="text-align:right;">
+              <div>
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
-                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:2px;">Mercedes AMG</div>
+                <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
@@ -1170,11 +1159,11 @@
             <img
               src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.png"
               alt="Andrea Kimi Antonelli fastest lap telemetry — Miami 2026"
-              style="max-width:min(820px,100%); width:100%; height:auto; display:block;"
+              style="max-width:100%; width:100%; height:auto; display:block;"
             >
           </div>
 
-          <div style="padding:0 2rem 2rem;">
+          <div style="padding:0 2rem 2.5rem;">
             <div style="
               border-left:3px solid #E8002D;
               background:#1A1A1A;
@@ -1189,46 +1178,40 @@
             </div>
           </div>
         </div>
-      </div><!-- /SLIDE 4 -->
-
-    </div><!-- /slideTrack -->
-
-    <!-- ===== NAVIGATION CONTROLS ===== -->
-
-    <!-- Prev / Next arrows -->
-    <button id="prevBtn" onclick="carouselMove(-1)" aria-label="Previous circuit" style="
-      position:absolute; top:50%; left:1rem;
+      </div></div><button id="prevBtn" onclick="carouselMove(-1)" aria-label="Previous circuit" style="
+      position:absolute; top:50%; left:2.5rem;
       transform:translateY(-50%);
-      background:rgba(15,15,15,0.85);
-      border:1px solid #333;
-      color:#F4F4F4;
-      width:44px; height:44px;
+      background:rgba(232, 0, 45, 0.9);
+      border:none;
+      color:#FFFFFF;
+      width:48px; height:48px;
       border-radius:50%;
-      font-size:1.2rem;
+      font-size:1.5rem;
+      font-weight:bold;
       cursor:pointer;
       display:flex; align-items:center; justify-content:center;
-      transition:background 0.2s, border-color 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
       z-index:10;
-      font-family:'Barlow Condensed',sans-serif;
-    ">&#8592;</button>
+    " onmouseover="this.style.background='#FFFFFF'; this.style.color='#E8002D';" onmouseout="this.style.background='rgba(232, 0, 45, 0.9)'; this.style.color='#FFFFFF';">&#10094;</button>
 
     <button id="nextBtn" onclick="carouselMove(1)" aria-label="Next circuit" style="
-      position:absolute; top:50%; right:1rem;
+      position:absolute; top:50%; right:2.5rem;
       transform:translateY(-50%);
-      background:rgba(15,15,15,0.85);
-      border:1px solid #333;
-      color:#F4F4F4;
-      width:44px; height:44px;
+      background:rgba(232, 0, 45, 0.9);
+      border:none;
+      color:#FFFFFF;
+      width:48px; height:48px;
       border-radius:50%;
-      font-size:1.2rem;
+      font-size:1.5rem;
+      font-weight:bold;
       cursor:pointer;
       display:flex; align-items:center; justify-content:center;
-      transition:background 0.2s, border-color 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: all 0.2s ease;
       z-index:10;
-      font-family:'Barlow Condensed',sans-serif;
-    ">&#8594;</button>
+    " onmouseover="this.style.background='#FFFFFF'; this.style.color='#E8002D';" onmouseout="this.style.background='rgba(232, 0, 45, 0.9)'; this.style.color='#FFFFFF';">&#10095;</button>
 
-    <!-- Dot indicators -->
     <div id="dotRow" style="
       display:flex; justify-content:center; align-items:center;
       gap:8px;
@@ -1241,7 +1224,6 @@
       <button class="cdot" onclick="carouselGoto(3)" aria-label="Go to slide 4" style="width:10px;height:4px;border:none;border-radius:2px;background:#444;cursor:pointer;transition:all 0.3s;padding:0;"></button>
     </div>
 
-    <!-- Round label strip -->
     <div style="
       display:flex; border-top:1px solid #1A1A1A;
       background:#0A0A0A;
@@ -1254,7 +1236,7 @@
         <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#666; line-height:1;">CHN</div>
         <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px;">Shanghai</div>
       </button>
-      <button onclick="carouselGoto(2)" id="tab2" style="flex:1; padding:0.9rem 0.5rem; background:transparent; border:none; border-right:1px solid #1A1A1A; cursor:pointer; transition:background 0.2s;">
+      <button onclick="carouselGoto(1)" id="tab2" style="flex:1; padding:0.9rem 0.5rem; background:transparent; border:none; border-right:1px solid #1A1A1A; cursor:pointer; transition:background 0.2s;">
         <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#666; line-height:1;">JPN</div>
         <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px;">Suzuka</div>
       </button>
@@ -1264,69 +1246,7 @@
       </button>
     </div>
 
-  </div><!-- /trackCarousel -->
-</div><!-- /content-section -->
-
-<script>
-(function(){
-  var current = 0;
-  var total = 4;
-  var track = document.getElementById('slideTrack');
-  var dots = document.querySelectorAll('.cdot');
-  var tabs = [
-    document.getElementById('tab0'),
-    document.getElementById('tab1'),
-    document.getElementById('tab2'),
-    document.getElementById('tab3')
-  ];
-
-  function update(n){
-    current = (n + total) % total;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-
-    dots.forEach(function(d,i){
-      if(i === current){
-        d.style.width = '28px';
-        d.style.background = '#E8002D';
-      } else {
-        d.style.width = '10px';
-        d.style.background = '#444';
-      }
-    });
-
-    tabs.forEach(function(t,i){
-      var label = t.querySelector('div');
-      if(i === current){
-        t.style.background = '#1A1A1A';
-        label.style.color = '#E8002D';
-      } else {
-        t.style.background = 'transparent';
-        label.style.color = '#666';
-      }
-    });
-  }
-
-  window.carouselMove = function(dir){ update(current + dir); };
-  window.carouselGoto = function(n){ update(n); };
-
-  /* swipe support */
-  var startX = 0;
-  var el = document.getElementById('trackCarousel');
-  el.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-  el.addEventListener('touchend', function(e){
-    var dx = e.changedTouches[0].clientX - startX;
-    if(Math.abs(dx) > 40){ update(current + (dx < 0 ? 1 : -1)); }
-  }, {passive:true});
-})();
-</script>
-
-<!-- pitstop divider -->
-<div class="pitstop-divider">
-  <div class="pit-line"></div>
-  <div class="pit-icon">Conclusion</div>
-  <div class="pit-line"></div>
-</div>
-
+  </div></div>```
 
 <!-- ===== CONCLUSION ===== -->
 <div class="content-section">
