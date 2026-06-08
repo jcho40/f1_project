@@ -1,12 +1,3 @@
-보내주신 HTML을 확인해 보니, 캐러셀 내부 탭 버튼들의 ID 값과 JavaScript 슬라이드 인덱스 매핑(`carouselGoto` 함수)에 매칭 오류가 있어 첫 번째 탭 외에는 슬라이드가 정상적으로 전환되지 않는 문제가 발생하고 있었습니다.
-
-특히 일본(JPN) 탭 버튼의 온클릭 속성이 `carouselGoto(1)`로 중복되어 있었고, 스크립트 단에서 각 탭의 활성화 클래스 및 스타일을 업데이트하는 배열 구조에 누락이 있었습니다.
-
-이 문제를 완벽히 해결하고, 이전에 요청하셨던 **콘텐츠 중앙 정렬 기조 유지** 및 **크고 가시성 높은 화살표 디자인**을 4개 슬라이드 전체(오스트레일리아, 차이나, 재팬, 미국)에 확실하게 반영한 **최종 통합 HTML 코드**를 드립니다.
-
-전체 코드를 그대로 복사해서 기존 파일에 덮어씌우시면 모든 트랙 탭과 좌우 화살표가 정상 작동합니다.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Barlow+Condensed:wght@300;400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 
   <style>
-    /* ===================== VARIABLES ===================== */
     :root {
       --f1-red:    #E8002D;
       --f1-dark:   #0F0F0F;
@@ -35,11 +25,8 @@
       --section-bg:#FFFFFF;
     }
 
-    /* ===================== RESET / BASE ===================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Source Serif 4', Georgia, serif;
       font-weight: 300;
@@ -48,7 +35,6 @@
       overflow-x: hidden;
     }
 
-    /* ===================== CHECKERED UTILITIES ===================== */
     .checkered {
       background-image: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%);
       background-size: 16px 16px;
@@ -58,7 +44,6 @@
       background-size: 10px 10px;
     }
 
-    /* ===================== TOP TICKER BAR ===================== */
     .ticker-bar {
       background: var(--f1-red);
       color: #fff;
@@ -85,15 +70,12 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* ===================== HERO ===================== */
     .hero {
       position: relative;
       background: var(--f1-dark);
       overflow: hidden;
       padding: 0;
     }
-
-    /* Animated speed lines behind everything */
     .speed-lines {
       position: absolute;
       inset: 0;
@@ -113,21 +95,8 @@
       90%  { opacity: 1; }
       100% { transform: translateX(120%); opacity: 0; }
     }
-
-    /* Checkered flag stripe at very top of hero */
-    .hero-flag-stripe {
-      height: 18px;
-      width: 100%;
-    }
-
-    /* Red accent bar */
-    .hero-red-bar {
-      height: 5px;
-      background: var(--f1-red);
-      width: 100%;
-    }
-
-    /* Main hero body */
+    .hero-flag-stripe { height: 18px; width: 100%; }
+    .hero-red-bar { height: 5px; background: var(--f1-red); width: 100%; }
     .hero-body {
       position: relative;
       z-index: 2;
@@ -137,8 +106,6 @@
       align-items: center;
       gap: 1rem;
     }
-
-    /* F1 badge / wordmark */
     .f1-wordmark {
       display: flex;
       align-items: center;
@@ -168,7 +135,6 @@
       text-transform: uppercase;
       color: var(--f1-silver);
     }
-
     .hero-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 900;
@@ -180,11 +146,7 @@
       text-transform: uppercase;
       animation: fadeUp 0.7s 0.15s ease both;
     }
-    .hero-title em {
-      color: var(--f1-red);
-      font-style: normal;
-    }
-
+    .hero-title em { color: var(--f1-red); font-style: normal; }
     .hero-authors {
       font-family: 'Rajdhani', sans-serif;
       font-size: 1rem;
@@ -203,13 +165,11 @@
       text-transform: uppercase;
       animation: fadeUp 0.7s 0.35s ease both;
     }
-
     @keyframes fadeUp {
       from { opacity:0; transform: translateY(22px); }
       to   { opacity:1; transform: translateY(0); }
     }
 
-    /* ===================== ANIMATED RACE TRACK ===================== */
     .race-track-wrapper {
       position: relative;
       width: 100%;
@@ -217,8 +177,6 @@
       background: var(--f1-dark);
       padding-bottom: 0.5rem;
     }
-
-    /* asphalt texture strip */
     .track-road {
       position: relative;
       height: 56px;
@@ -240,8 +198,6 @@
       from { background-position: 0 0; }
       to   { background-position: 60px 0; }
     }
-
-    /* track edge lines */
     .track-road::after {
       content:'';
       position: absolute;
@@ -249,13 +205,7 @@
       height: 4px;
       background: var(--f1-red);
     }
-
-    .track-bottom-line {
-      height: 4px;
-      background: var(--f1-red);
-    }
-
-    /* F1 Car SVG — animated across track */
+    .track-bottom-line { height: 4px; background: var(--f1-red); }
     .car-wrapper {
       position: absolute;
       bottom: 8px;
@@ -267,8 +217,6 @@
       0%   { left: -200px; }
       100% { left: calc(100% + 200px); }
     }
-
-    /* Exhaust particle system */
     .exhaust {
       position: absolute;
       right: 100%;
@@ -291,33 +239,13 @@
       100% { opacity: 0; transform: translateX(-20px) scale(0.2); }
     }
 
-    /* ===================== NAV / SECTION DIVIDER ===================== */
-    .section-divider {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin: 0;
-      height: 8px;
-    }
-    .div-red   { flex: 1; height: 100%; background: var(--f1-red); }
-    .div-black { width: 40px; height: 100%; background: var(--f1-dark); }
-    .div-grey  { flex: 2; height: 100%; background: #ddd; }
-
-    /* ===================== SECTIONS ===================== */
     .content-section {
       background: var(--section-bg);
       padding: 4rem 1.5rem;
     }
-    .content-section:nth-child(even) {
-      background: #FAFAF9;
-    }
+    .content-section:nth-child(even) { background: #FAFAF9; }
+    .container { max-width: 900px; margin: 0 auto; }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    /* Section heading with red underline bar — increased font sizes */
     .section-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
@@ -336,7 +264,6 @@
       clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 100%, 0% 100%);
     }
 
-    /* Abstract card */
     .abstract-card {
       background: var(--f1-dark);
       color: var(--f1-white);
@@ -365,7 +292,6 @@
       text-align: justify;
     }
 
-    /* Body text — justified */
     .body-text {
       font-size: 1rem;
       line-height: 1.85;
@@ -375,11 +301,7 @@
     }
     .body-text strong { color: var(--text-dark); font-weight: 600; }
 
-    /* Figures */
-    .figure-wrap {
-      margin: 2.5rem 0;
-      text-align: center;
-    }
+    .figure-wrap { margin: 2.5rem 0; text-align: center; }
     .figure-wrap img {
       max-width: 100%;
       height: auto;
@@ -394,10 +316,7 @@
       line-height: 1.6;
       text-align: justify;
     }
-    .figure-caption strong {
-      color: var(--f1-red);
-      font-weight: 700;
-    }
+    .figure-caption strong { color: var(--f1-red); font-weight: 700; }
     .fig-label {
       display: inline-block;
       background: var(--f1-red);
@@ -411,7 +330,6 @@
       clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
     }
 
-    /* Stat callout boxes */
     .stat-strip {
       display: flex;
       gap: 1px;
@@ -435,7 +353,6 @@
       line-height: 1;
       display: block;
     }
-    .stat-box:nth-child(2) .stat-num { color: #fff; }
     .stat-label {
       font-family: 'Rajdhani', sans-serif;
       font-size: 0.7rem;
@@ -447,7 +364,6 @@
       display: block;
     }
 
-    /* Sub-section heading */
     .sub-title {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 700;
@@ -464,7 +380,6 @@
       margin: 0.3rem auto 1.5rem;
     }
 
-    /* Definition boxes for Figure 2 */
     .def-box {
       background: #F7F5F2;
       border-left: 3px solid var(--f1-red);
@@ -478,12 +393,8 @@
       color: var(--text-mid);
       text-align: justify;
     }
-    .def-box strong {
-      color: var(--text-dark);
-      font-weight: 700;
-    }
+    .def-box strong { color: var(--text-dark); font-weight: 700; }
 
-    /* References */
     .ref-section {
       background: var(--f1-dark);
       padding: 3rem 1.5rem;
@@ -514,18 +425,12 @@
     }
     .ref-list a { color: #8BB5D4; }
 
-    /* ===================== FOOTER ===================== */
     footer {
       background: var(--f1-dark);
       border-top: 1px solid #222;
     }
-    .footer-flag {
-      height: 14px;
-    }
-    .footer-inner {
-      padding: 1.5rem 1.5rem;
-      text-align: center;
-    }
+    .footer-flag { height: 14px; }
+    .footer-inner { padding: 1.5rem 1.5rem; text-align: center; }
     .footer-inner p {
       font-family: 'Rajdhani', sans-serif;
       font-size: 0.8rem;
@@ -542,7 +447,6 @@
       margin-bottom: 1rem;
     }
 
-    /* ===================== PROGRESS / SCROLL INDICATOR ===================== */
     .scroll-progress {
       position: fixed;
       top: 0; left: 0;
@@ -553,7 +457,6 @@
       transition: width 0.1s linear;
     }
 
-    /* ===================== PITSTOP DIVIDER ===================== */
     .pitstop-divider {
       display: flex;
       align-items: center;
@@ -572,6 +475,35 @@
       text-transform: uppercase;
     }
 
+    /* ── Carousel arrow buttons ── */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(232, 0, 45, 0.92);
+      border: none;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      z-index: 20;
+      line-height: 1;
+    }
+    .carousel-btn:hover {
+      background: #fff;
+      color: var(--f1-red);
+      transform: translateY(-50%) scale(1.08);
+    }
+    .carousel-btn-prev { left: 1.2rem; }
+    .carousel-btn-next { right: 1.2rem; }
   </style>
 </head>
 <body>
@@ -610,9 +542,7 @@
         <div class="f1-tag" style="color:#666;">CDS 301 / 501 · Spring 2026</div>
       </div>
     </div>
-
     <h1 class="hero-title">Why Fans <em>Love</em><br>F1 Tracks</h1>
-
     <div class="hero-authors">
       Jeonghwa Cho &nbsp;·&nbsp; Seunghyun Ryu &nbsp;·&nbsp; Seohyun Kim &nbsp;·&nbsp; Yonggyun Kim
     </div>
@@ -660,6 +590,7 @@
   <div class="hero-flag-stripe checkered"></div>
 </div>
 
+<!-- ABSTRACT -->
 <div class="content-section">
   <div class="container">
     <h2 class="section-title">Abstract</h2>
@@ -669,7 +600,6 @@
         What makes Formula 1 one of the most compelling sporting spectacles in the world? While many attribute this global obsession to high-speed engineering and driver rivalries, the true theater of the drama is the racetrack itself. This project explores the global fascination with F1 by shifting the focus entirely to circuit dynamics. Utilizing historical race data, lap-time volatility, and high-frequency sector telemetry gathered via the FastF1 API, we examine how the sheer architectural diversity and unpredictable evolution of racetracks capture the imaginations of millions of fans. Our multi-layered visual analysis demonstrates that the structural characteristics of a circuit do not merely host the race—they actively dictate the strategy, fuel the speed, and generate the edge-of-your-seat unpredictability that keeps fans fundamentally obsessed.
       </p>
     </div>
-
     <div class="stat-strip">
       <div class="stat-box">
         <span class="stat-num">70.3s</span>
@@ -693,18 +623,17 @@
   <div class="pit-line"></div>
 </div>
 
+<!-- SECTION 1 -->
 <div class="content-section">
   <div class="container">
     <h2 class="section-title">Track Types and National Strategies</h2>
     <div class="section-title-bar"></div>
-
     <p class="body-text">
       The isotype chart below maps how countries differ in the types of F1 venues they have hosted — permanent race circuits, temporary street circuits, and road circuits. Each hexagon represents one unique circuit, with the count shown immediately after the country name for quick reference. Countries are ranked from top to bottom by the number of distinct circuits hosted, making cross-country comparisons immediate.
     </p>
     <p class="body-text">
       The United States leads with 12 distinct circuits — nearly double France's 7 in second place — reflecting a deliberate strategy of bringing the sport to new regions rather than anchoring it to a single venue. Street circuits, which demand an entirely different engineering challenge from a permanent track, are concentrated almost exclusively in the U.S. and a handful of European cities. Traditional motorsport nations such as Italy and the United Kingdom, by contrast, host only four unique venues each yet maintain a dominant presence on the F1 calendar, signaling that heritage and continuity define their relationship with the sport. Filled hexagons indicate circuits currently active on the F1 calendar; outline-only hexagons represent retired venues, making it immediately visible how much of each country's hosting history belongs to the modern era versus the sport's past.
     </p>
-
     <div class="figure-wrap">
       <div class="fig-label">Figure 1</div>
       <img src="./static/images/Seou0.png" alt="F1 Circuits Hosted per Country">
@@ -712,21 +641,17 @@
         <strong>Figure 1.</strong> Unique F1 circuits hosted by country, ranked by circuit count. The count appears immediately after each country name for at-a-glance comparison. Each hexagon represents one circuit: colour encodes circuit type (red = race circuit, blue = street circuit, gold = road circuit), and fill encodes status — solid hexagons are currently active on the F1 calendar, while outline-only hexagons are retired venues. The United States leads with 12 circuits, nearly double France (7).
       </div>
     </div>
-
     <p class="body-text">
       This distribution reveals a fundamental duality in how nations build their relationship with motorsport. Countries like the United States pursue excitement through variety — 12 distinct venues spread across different eras and regions, the majority now retired, reflecting a willingness to experiment and move on. At the other end of the spectrum, Italy's four circuits carry a depth of history that no rotating calendar can replicate. This contrast sets the stage directly for Figure 2, which measures not just how many circuits a country has hosted, but how intensively each one was actually used.
     </p>
-
     <div class="sub-title">Venue Count vs. Venue Loyalty</div>
     <div class="sub-title-bar"></div>
-
     <div class="def-box">
       <p><strong>Venue Loyalty</strong> refers to the concentration of races at a small number of circuits. A country with high venue loyalty has hosted many Grand Prix events at the same locations over time, reflecting deep historical and institutional ties to those circuits.</p>
     </div>
     <div class="def-box">
       <p><strong>Venue Count</strong> refers to the total number of distinct circuits a country has ever hosted a Formula 1 Grand Prix at, regardless of how frequently each venue appeared on the calendar.</p>
     </div>
-
     <div class="figure-wrap">
       <div class="fig-label">Figure 2</div>
       <img src="./static/images/Seou1.png" alt="Total Races vs Number of Circuits">
@@ -734,14 +659,12 @@
         <strong>Figure 2.</strong> Total races hosted (red dot) plotted against the number of unique circuits scaled ×10 (blue dot) for the top 20 countries by race count. The horizontal gap between the two dots is a direct measure of venue loyalty: a wide rightward lean of the red dot signals many races concentrated at few circuits (Italy, Monaco), while a wide rightward lean of the blue dot signals many circuits used relatively infrequently (United States). Filled dots mark countries with at least one circuit still active today; outline dots mark fully retired hosts. Circuit count and race count are labelled on either side of each dumbbell for direct comparison.
       </div>
     </div>
-
     <p class="body-text">
       The dumbbell chart makes venue loyalty legible at a glance. Italy sits at one extreme: 109 total races across only 4 circuits — the widest gap on the chart — driven above all by Monza's near-unbroken presence on the calendar since 1950. Monaco reinforces this pattern with 71 Grands Prix hosted by a single street circuit, more than most multi-venue countries manage in total.
     </p>
     <p class="body-text">
       The United States occupies the opposite pole. Twelve unique circuits have hosted just 82 races combined, meaning the average American venue saw fewer than seven events before being replaced or retired. The blue dot (circuits ×10 = 120) reaching far beyond the red dot (82 races) is the visual signature of this rotation-first philosophy. France and Germany show similar patterns — high circuit counts relative to sustained use — and both appear in muted tones because neither currently holds a place on the F1 calendar. These faded entries serve as a quiet reminder that a long hosting history is no guarantee of permanence. Taken together, the two extremes frame the central tension in F1's global story: <strong>legacy and concentration on one side, geographic reach and reinvention on the other</strong>.
     </p>
-
     <div class="figure-wrap">
       <div class="fig-label">Figure 3</div>
       <img src="./static/images/shn1.png" alt="Turns Distribution by Circuit Type">
@@ -749,11 +672,9 @@
         <strong>Figure 3.</strong> Distribution of the number of turns across different circuit types, shown as a scatter/swarm plot with individual data points to convey the full spread of the data. Street circuits exhibit both the highest density of intricate layouts and the widest overall range of turn counts, confirming that temporary urban venues are structurally the most varied category on the F1 calendar.
       </div>
     </div>
-
     <p class="body-text">
       Does this structural complexity directly change the pacing of a Grand Prix? To answer this, we analyzed the direct correlation between the volume of turns and the resulting <strong>Average Best Lap Times</strong>. The data reveals a clear, progressive penalty on time as the circuit layout becomes more intricate.
     </p>
-
     <div class="figure-wrap">
       <div class="fig-label">Figure 4</div>
       <img src="./static/images/shn2.png" alt="More Turns More Time Scatter Plot">
@@ -761,7 +682,6 @@
         <strong>Figure 4.</strong> Scatter plot of F1 circuit best lap times against the number of turns for grand prix circuits active since 2000. Each point represents a single circuit. The dashed line represents the overall linear trend, illustrating a strong positive correlation where an increase in turn count consistently extends lap times due to accumulated braking and cornering phases. This direct representation highlights how track layout inherently shapes the structural baseline for lap times and race strategy.
       </div>
     </div>
-
     <p class="body-text">
       As the visualization demonstrates, tracks with few corners (≤13) yield blistering fast laps averaging 70.3 seconds. However, as the turn count climbs into the "Many" category (≥18), the average lap time stretches significantly to 90.9 seconds. This physical reality forces teams into a high-stakes compromise: do they setup the car for pure straight-line velocity, or maximize downforce for cornering precision? This architectural tension is exactly why every circuit tells a completely different story.
     </p>
@@ -774,15 +694,14 @@
   <div class="pit-line"></div>
 </div>
 
+<!-- SECTION 2 -->
 <div class="content-section">
   <div class="container">
     <h2 class="section-title">Single Layout Revisions:<br>Persistence and Impact</h2>
     <div class="section-title-bar"></div>
-
     <p class="body-text">
       To clearly understand how a layout change affects lap times, we gathered circuits that modified their track configuration exactly once between 2003 and 2024. In this analysis, a <strong>layout revision</strong> is strictly defined as a physical alteration to the track geometry — such as adding a new chicane, re-profiling a corner, or changing the total track length — rather than routine resurfacing or changes to run-off areas that do not affect the racing line. Only circuits with a single such intervention are included, allowing before-and-after lap time comparisons that are unambiguous and attributable to one structural change. José Carlos Pace and Melbourne lead the group with 21 and 20 races respectively, demonstrating that a single layout revision does not push a circuit off the calendar — in fact, both remain fixtures of the modern F1 season.
     </p>
-
     <div class="figure-wrap">
       <div class="fig-label">Figure 5</div>
       <img src="./static/images/yg1.png" alt="Circuits with exactly one layout change">
@@ -799,22 +718,19 @@
   <div class="pit-line"></div>
 </div>
 
+<!-- SECTION 3 -->
 <div class="content-section">
   <div class="container">
     <h2 class="section-title">Evolution of Speed:<br>The Anatomy of a Layout Change</h2>
     <div class="section-title-bar"></div>
-
     <p class="body-text">
       Why do track modifications create such intense anticipation among F1 fans? Racetracks are living architectures; even a minor alteration to a corner can fundamentally shift the mechanical balance and execution of speed. To explore this, we isolated iconic circuits that have undergone <strong>exactly one major layout modification</strong> in modern history, and analyzed how these structural redesigns rewrite the laws of velocity. Two circuits provide especially instructive case studies: Abu Dhabi's Yas Marina and Melbourne's Albert Park.
     </p>
-
     <div class="sub-title">Abu Dhabi — Yas Marina</div>
     <div class="sub-title-bar"></div>
-
     <p class="body-text">
       The first case study is the <strong>Abu Dhabi (Yas Marina) Grand Prix Circuit</strong>. Before the 2021 race, the circuit underwent its most dramatic transformation since its debut in 2009, shortening the track length from 5.554 km to 5.281 km and eliminating five entire corners (reducing the turn count from 21 to 16). The redesign fundamentally altered the circuit's character, shifting it from a technically demanding, low-speed puzzle into a higher-speed, momentum-driven layout. The structural change triggered an immediate and measurable leap in lap times, rewriting the pace benchmarks of what had long been Formula 1's definitive season finale.
     </p>
-
     <div class="figure-wrap">
       <div class="fig-label">Figure 6</div>
       <img src="./static/images/ygn1.png" alt="Abu Dhabi Yas Marina Lap Time Trend">
@@ -822,14 +738,11 @@
         <strong>Figure 6.</strong> Fastest lap and winner's average lap at Abu Dhabi's Yas Marina Circuit across the pre- and post-revision eras. The 2021 layout change — removing five corners and 273 metres of track — produced a sharp downward step in lap times, reflecting the circuit's transformation from a processional low-speed venue into one of the fastest permanent circuits on the calendar.
       </div>
     </div>
-
     <div class="sub-title">Melbourne — Albert Park</div>
     <div class="sub-title-bar"></div>
-
     <p class="body-text">
       The second case study is the <strong>Melbourne (Albert Park) Grand Prix Circuit</strong>. Prior to the 2022 race, the circuit underwent its most aggressive redesign since 1996, shortening the track length from 5.303 km to 5.278 km and deleting two entire corners (reducing the turn count from 16 to 14). By transforming slow, technical corners into a sweeping high-speed complex, the structural change triggered an immediate, historic leap in speed.
     </p>
-
     <div class="figure-wrap">
       <div class="fig-label">Figure 7</div>
       <img src="./static/images/ygn2.png" alt="Melbourne Albert Park Lap Time Trend">
@@ -846,8 +759,8 @@
   <div class="pit-line"></div>
 </div>
 
+<!-- SECTION 4 · TELEMETRY CAROUSEL -->
 <div class="content-section" style="padding: 0; overflow: hidden;">
-
   <div style="padding: 4rem 1.5rem 2.5rem; text-align:center;">
     <div class="container">
       <h2 class="section-title">Straights vs Corners:<br>Telemetry Highlights</h2>
@@ -860,197 +773,189 @@
 
   <div id="trackCarousel" style="position:relative; max-width:900px; margin:0 auto; background:#0F0F0F; user-select:none; border-radius:4px; overflow:hidden;">
 
-    <div id="slideTrack" style="
-      display: flex;
-      transition: transform 0.55s cubic-bezier(0.77,0,0.175,1);
-      will-change: transform;
-    ">
+    <div id="slideTrack" style="display:flex; transition:transform 0.55s cubic-bezier(0.77,0,0.175,1); will-change:transform;">
 
-      <div class="tslide" style="min-width:100%; position:relative;">
-        <div class="tslide-bg" style="background:#0F0F0F;">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
+      <!-- ── SLIDE 1 · AUSTRALIA ── -->
+      <div class="tslide" style="min-width:100%;">
+        <div style="background:#0F0F0F;">
+          <!-- Round / counter row -->
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
-              <div style="background: #E8002D; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:#fff; padding:3px 10px; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Round 1</div>
+              <div style="background:#E8002D; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:#fff; padding:3px 10px; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Round 1</div>
               <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">3 – 6 Mar 2026</span>
             </div>
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">1 / 4</div>
           </div>
-
-          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
+          <!-- Circuit meta — centred -->
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1rem;">
             <div>
-              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.3rem;">
                 <span style="font-size:1.5rem;">🇦🇺</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">Australia · Melbourne</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Albert Park Grand Prix Circuit</div>
             </div>
-            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
-              <div>
+            <div style="display:flex; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem;">
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">82.670s</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div>
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">GEO RUSSELL</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
-
+          <!-- Image -->
           <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
             <img src="./static/images/F1_2026_Australia_Russell_Final.png" alt="George Russell fastest lap telemetry — Albert Park 2026" style="max-width:100%; width:100%; height:auto; display:block;">
           </div>
-
+          <!-- Insight -->
           <div style="padding:0 2rem 2.5rem;">
             <div style="border-left:3px solid #E8002D; background:#1A1A1A; padding:0.8rem 1.2rem; font-family:'Source Serif 4',Georgia,serif; font-size:0.88rem; font-weight:300; color:#bbb; line-height:1.7; max-width:700px; margin:0 auto; text-align:justify;">
               Albert Park's redesigned layout emphasises high-speed flow. Long full-throttle sections push past <strong style="color:#F4F4F4;">300 km/h</strong>, and the deep crimson stretches on the map reveal how little time drivers spend below 200 km/h. The 2022 corner deletions are still paying off in raw speed.
             </div>
           </div>
         </div>
-      </div><div class="tslide" style="min-width:100%; position:relative;">
-        <div class="tslide-bg" style="background:#0F0F0F;">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
+      </div>
+
+      <!-- ── SLIDE 2 · CHINA ── -->
+      <div class="tslide" style="min-width:100%;">
+        <div style="background:#0F0F0F;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
               <div style="background:#E8002D; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:#fff; padding:3px 10px; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Round 2</div>
               <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">13 – 15 Mar 2026</span>
             </div>
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">2 / 4</div>
           </div>
-
-          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1rem;">
             <div>
-              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.3rem;">
                 <span style="font-size:1.5rem;">🇨🇳</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">China · Shanghai</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Shanghai International Circuit</div>
             </div>
-            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
-              <div>
+            <div style="display:flex; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem;">
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">95.275s</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div>
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
-
           <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
             <img src="./static/images/F1_2026_China_Antonelli_Track.png" alt="Andrea Kimi Antonelli fastest lap telemetry — Shanghai 2026" style="max-width:100%; width:100%; height:auto; display:block;">
           </div>
-
           <div style="padding:0 2rem 2.5rem;">
             <div style="border-left:3px solid #E8002D; background:#1A1A1A; padding:0.8rem 1.2rem; font-family:'Source Serif 4',Georgia,serif; font-size:0.88rem; font-weight:300; color:#bbb; line-height:1.7; max-width:700px; margin:0 auto; text-align:justify;">
               Shanghai's iconic "snake" sector sequence forces continuous direction changes, creating the pale yellow corridors on the map. The long back straight DRS zone offers brief respite before Turns 13–16 demand maximum downforce — a true car-setup paradox.
             </div>
           </div>
         </div>
-      </div><div class="tslide" style="min-width:100%; position:relative;">
-        <div class="tslide-bg" style="background:#0F0F0F;">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
+      </div>
+
+      <!-- ── SLIDE 3 · JAPAN ── -->
+      <div class="tslide" style="min-width:100%;">
+        <div style="background:#0F0F0F;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
               <div style="background:#E8002D; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:#fff; padding:3px 10px; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Round 3</div>
               <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">27 – 29 Mar 2026</span>
             </div>
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">3 / 4</div>
           </div>
-
-          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1rem;">
             <div>
-              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.3rem;">
                 <span style="font-size:1.5rem;">🇯🇵</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">Japan · Suzuka</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Suzuka Circuit</div>
             </div>
-            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
-              <div>
+            <div style="display:flex; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem;">
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">92.432s</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div>
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
-
           <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
             <img src="./static/images/F1_2026_Japan_Antonelli_Track.png" alt="Andrea Kimi Antonelli fastest lap telemetry — Suzuka 2026" style="max-width:100%; width:100%; height:auto; display:block;">
           </div>
-
           <div style="padding:0 2rem 2.5rem;">
             <div style="border-left:3px solid #E8002D; background:#1A1A1A; padding:0.8rem 1.2rem; font-family:'Source Serif 4',Georgia,serif; font-size:0.88rem; font-weight:300; color:#bbb; line-height:1.7; max-width:700px; margin:0 auto; text-align:justify;">
               Suzuka's figure-of-eight layout is unique on the calendar. The legendary 130R corner — taken flat in qualifying at over <strong style="color:#F4F4F4;">290 km/h</strong> — appears as a deep crimson arc. The Esses complex keeps speed relatively constant but demands extreme precision, shown in graduated amber tones.
             </div>
           </div>
         </div>
-      </div><div class="tslide" style="min-width:100%; position:relative;">
-        <div class="tslide-bg" style="background:#0F0F0F;">
-          <div style="display:flex; flex-direction:column; align-items:center; gap:0.5rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
+      </div>
+
+      <!-- ── SLIDE 4 · MIAMI ── -->
+      <div class="tslide" style="min-width:100%;">
+        <div style="background:#0F0F0F;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0.4rem; padding:1.4rem 2rem 0.8rem; border-bottom:1px solid #1f1f1f; text-align:center;">
             <div style="display:flex; align-items:center; gap:0.9rem;">
               <div style="background:#E8002D; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:#fff; padding:3px 10px; clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">Round 4</div>
               <span style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#888;">2 – 4 May 2026</span>
             </div>
             <div style="font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#555;">4 / 4</div>
           </div>
-
-          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1.2rem;">
+          <div style="padding:1.5rem 2rem 0; display:flex; flex-direction:column; align-items:center; text-align:center; gap:1rem;">
             <div>
-              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.4rem;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:0.6rem; margin-bottom:0.3rem;">
                 <span style="font-size:1.5rem;">🇺🇸</span>
                 <span style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.75rem; color:#F4F4F4; letter-spacing:0.02em; text-transform:uppercase; line-height:1;">USA · Miami Gardens</span>
               </div>
               <div style="font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#666;">Miami International Autodrome</div>
             </div>
-            <div style="display:flex; justify-content:center; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem; width:100%; max-width:400px;">
-              <div>
+            <div style="display:flex; gap:2.5rem; border-top:1px solid #1A1A1A; padding-top:1rem;">
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#E8002D; line-height:1;">91.968s</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Fastest Lap</div>
               </div>
-              <div>
+              <div style="text-align:center;">
                 <div style="font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:1.4rem; color:#C0C0C0; line-height:1;">A.K. ANTONELLI</div>
                 <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; letter-spacing:0.15em; text-transform:uppercase; color:#555; margin-top:4px;">Mercedes AMG</div>
               </div>
             </div>
           </div>
-
           <div style="padding:1.5rem 2rem 2rem; display:flex; justify-content:center;">
             <img src="./static/images/F1_2026_Miami_Antonelli_Track_Bordered.png" alt="Andrea Kimi Antonelli fastest lap telemetry — Miami 2026" style="max-width:100%; width:100%; height:auto; display:block;">
           </div>
-
           <div style="padding:0 2rem 2.5rem;">
             <div style="border-left:3px solid #E8002D; background:#1A1A1A; padding:0.8rem 1.2rem; font-family:'Source Serif 4',Georgia,serif; font-size:0.88rem; font-weight:300; color:#bbb; line-height:1.7; max-width:700px; margin:0 auto; text-align:justify;">
               Miami's wide, purpose-built layout has two long straights that produce the darkest crimson sections of the map, yet the tight infield chicane sequence forces hard braking — the sharp colour transitions reveal just how aggressively energy is scrubbed off within metres.
             </div>
           </div>
         </div>
-      </div></div><button id="prevBtn" onclick="carouselMove(-1)" aria-label="Previous circuit" style="
-      position:absolute; top:50%; left:2.5rem; transform:translateY(-50%);
-      background:rgba(232, 0, 45, 0.9); border:none; color:#FFFFFF;
-      width:48px; height:48px; border-radius:50%; font-size:1.5rem; font-weight:bold;
-      cursor:pointer; display:flex; align-items:center; justify-content:center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: all 0.2s ease; z-index:10;
-    " onmouseover="this.style.background='#FFFFFF'; this.style.color='#E8002D';" onmouseout="this.style.background='rgba(232, 0, 45, 0.9)'; this.style.color='#FFFFFF';">&#10094;</button>
+      </div>
 
-    <button id="nextBtn" onclick="carouselMove(1)" aria-label="Next circuit" style="
-      position:absolute; top:50%; right:2.5rem; transform:translateY(-50%);
-      background:rgba(232, 0, 45, 0.9); border:none; color:#FFFFFF;
-      width:48px; height:48px; border-radius:50%; font-size:1.5rem; font-weight:bold;
-      cursor:pointer; display:flex; align-items:center; justify-content:center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: all 0.2s ease; z-index:10;
-    " onmouseover="this.style.background='#FFFFFF'; this.style.color='#E8002D';" onmouseout="this.style.background='rgba(232, 0, 45, 0.9)'; this.style.color='#FFFFFF';">&#10095;</button>
+    </div><!-- /slideTrack -->
 
+    <!-- Arrow buttons — positioned on image area -->
+    <button class="carousel-btn carousel-btn-prev" onclick="carouselMove(-1)" aria-label="Previous circuit">&#10094;</button>
+    <button class="carousel-btn carousel-btn-next" onclick="carouselMove(1)" aria-label="Next circuit">&#10095;</button>
+
+    <!-- Dot indicators -->
     <div id="dotRow" style="display:flex; justify-content:center; align-items:center; gap:8px; padding:1.2rem 0 1.6rem; background:#0F0F0F;">
-      <button class="cdot active" onclick="carouselGoto(0)" aria-label="Go to slide 1" style="width:28px;height:4px;border:none;border-radius:2px;background:#E8002D;cursor:pointer;transition:all 0.3s;padding:0;"></button>
+      <button class="cdot" onclick="carouselGoto(0)" aria-label="Go to slide 1" style="width:28px;height:4px;border:none;border-radius:2px;background:#E8002D;cursor:pointer;transition:all 0.3s;padding:0;"></button>
       <button class="cdot" onclick="carouselGoto(1)" aria-label="Go to slide 2" style="width:10px;height:4px;border:none;border-radius:2px;background:#444;cursor:pointer;transition:all 0.3s;padding:0;"></button>
       <button class="cdot" onclick="carouselGoto(2)" aria-label="Go to slide 3" style="width:10px;height:4px;border:none;border-radius:2px;background:#444;cursor:pointer;transition:all 0.3s;padding:0;"></button>
       <button class="cdot" onclick="carouselGoto(3)" aria-label="Go to slide 4" style="width:10px;height:4px;border:none;border-radius:2px;background:#444;cursor:pointer;transition:all 0.3s;padding:0;"></button>
     </div>
 
+    <!-- Round tab strip -->
     <div style="display:flex; border-top:1px solid #1A1A1A; background:#0A0A0A;">
-      <button onclick="carouselGoto(0)" id="tab0" style="flex:1; padding:0.9rem 0.5rem; background:transparent; border:none; border-right:1px solid #1A1A1A; cursor:pointer; transition:background 0.2s;">
+      <button onclick="carouselGoto(0)" id="tab0" style="flex:1; padding:0.9rem 0.5rem; background:#1A1A1A; border:none; border-right:1px solid #1A1A1A; cursor:pointer; transition:background 0.2s;">
         <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:#E8002D; line-height:1;">AUS</div>
         <div style="font-family:'Rajdhani',sans-serif; font-size:0.65rem; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin-top:2px;">Melbourne</div>
       </button>
@@ -1068,7 +973,10 @@
       </button>
     </div>
 
-  </div></div><script>
+  </div><!-- /trackCarousel -->
+</div><!-- /section -->
+
+<script>
 (function(){
   var current = 0;
   var total = 4;
@@ -1084,37 +992,24 @@
   function update(n){
     current = (n + total) % total;
     track.style.transform = 'translateX(-' + (current * 100) + '%)';
-
     dots.forEach(function(d,i){
-      if(i === current){
-        d.style.width = '28px';
-        d.style.background = '#E8002D';
-      } else {
-        d.style.width = '10px';
-        d.style.background = '#444';
-      }
+      d.style.width  = i === current ? '28px' : '10px';
+      d.style.background = i === current ? '#E8002D' : '#444';
     });
-
     tabs.forEach(function(t,i){
       var label = t.querySelector('div');
-      if(i === current){
-        t.style.background = '#1A1A1A';
-        label.style.color = '#E8002D';
-      } else {
-        t.style.background = 'transparent';
-        label.style.color = '#666';
-      }
+      t.style.background = i === current ? '#1A1A1A' : 'transparent';
+      label.style.color  = i === current ? '#E8002D' : '#666';
     });
   }
 
   window.carouselMove = function(dir){ update(current + dir); };
   window.carouselGoto = function(n){ update(n); };
 
-  /* swipe support */
   var startX = 0;
   var el = document.getElementById('trackCarousel');
   el.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-  el.addEventListener('touchend', function(e){
+  el.addEventListener('touchend',   function(e){
     var dx = e.changedTouches[0].clientX - startX;
     if(Math.abs(dx) > 40){ update(current + (dx < 0 ? 1 : -1)); }
   }, {passive:true});
@@ -1127,11 +1022,11 @@
   <div class="pit-line"></div>
 </div>
 
+<!-- CONCLUSION -->
 <div class="content-section">
   <div class="container">
     <h2 class="section-title">Conclusion</h2>
     <div class="section-title-bar"></div>
-
     <p class="body-text">
       This project demonstrates that the circuit itself is the central protagonist of every Formula 1 Grand Prix — not merely the stage on which the race unfolds. Through four interconnected layers of analysis, we have shown how racetrack architecture shapes every dimension of the sport that fans find compelling. The global distribution of hosting nations reveals two fundamentally different philosophies: the heritage concentration of countries like Italy and Monaco, where decades of racing history are embedded in a handful of circuits, and the variety-driven approach of the United States, where 12 different venues have hosted events in a constant search for new audiences and contexts.
     </p>
@@ -1147,6 +1042,7 @@
   </div>
 </div>
 
+<!-- REFERENCES -->
 <div class="ref-section">
   <div class="container">
     <h2 class="section-title" style="color:var(--f1-white);">References and Data Sources</h2>
@@ -1164,6 +1060,7 @@
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-flag checkered"></div>
   <div class="footer-inner">
@@ -1179,28 +1076,21 @@
 </footer>
 
 <script>
-  // ---------- Scroll progress bar ----------
   const bar = document.getElementById('scrollProgress');
   window.addEventListener('scroll', () => {
     const total = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = (window.scrollY / total * 100) + '%';
   });
 
-  // ---------- Speed lines generator ----------
   const linesContainer = document.getElementById('speedLines');
-  const lineCount = 18;
-  for (let i = 0; i < lineCount; i++) {
+  for (let i = 0; i < 18; i++) {
     const line = document.createElement('div');
     line.className = 'speed-line';
-    const top = 5 + Math.random() * 90;
-    const width = 30 + Math.random() * 50;
-    const delay = Math.random() * 2.4;
-    const dur = 1.8 + Math.random() * 1.4;
     line.style.cssText = `
-      top: ${top}%;
-      width: ${width}px;
-      animation-delay: ${delay}s;
-      animation-duration: ${dur}s;
+      top: ${5 + Math.random() * 90}%;
+      width: ${30 + Math.random() * 50}px;
+      animation-delay: ${Math.random() * 2.4}s;
+      animation-duration: ${1.8 + Math.random() * 1.4}s;
     `;
     linesContainer.appendChild(line);
   }
@@ -1208,5 +1098,3 @@
 
 </body>
 </html>
-
-```
